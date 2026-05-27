@@ -178,7 +178,8 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 .pais-donut .donut-inner{flex-direction:column;align-items:center;gap:12px;}
 .pais-donut .donut-legend{grid-template-columns:1fr;gap:5px;}
 .pais-bars{flex:1;display:flex;flex-direction:column;}
-.pais-bars .chart-wrap{flex:1;margin-bottom:0;}
+.pais-bars .chart-wrap{flex:1;margin-bottom:0;display:flex;flex-direction:column;}
+.pais-bars .vbar-area{flex:1;}
 @media(max-width:860px){.pais-layout{flex-direction:column;}.pais-donut{width:100%;}}
 /* ── TOOLTIP JS ── */
 #vt{position:fixed;background:var(--dark);color:#fff;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;padding:5px 11px;border-radius:8px;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.35);z-index:9999;opacity:0;transition:opacity .12s;transform:translateX(-50%);}
@@ -459,7 +460,8 @@ function buildDonutHostales(hostales) {
     '</div>';
   }).join('');
   var verMasBtn = segs.length > MAX_V
-    ? '<button onclick="document.querySelectorAll(\'.dh-x-'+uid+'\').forEach(function(e){e.style.display=\'\';});this.style.display=\'none\'" style="margin-top:6px;font-family:Outfit,sans-serif;font-size:9px;font-weight:700;color:var(--coral);background:none;border:none;cursor:pointer;padding:0;letter-spacing:.3px">▼ Ver más ('+(segs.length-MAX_V)+')</button>'
+    ? '<button id="mas-'+uid+'" onclick="document.querySelectorAll(\'.dh-x-'+uid+'\').forEach(function(e){e.style.display=\'\';});this.style.display=\'none\';document.getElementById(\'menos-'+uid+'\').style.display=\'\'" style="margin-top:6px;font-family:Outfit,sans-serif;font-size:9px;font-weight:700;color:var(--coral);background:none;border:none;cursor:pointer;padding:0;letter-spacing:.3px">▼ Ver más ('+(segs.length-MAX_V)+')</button>' +
+      '<button id="menos-'+uid+'" onclick="document.querySelectorAll(\'.dh-x-'+uid+'\').forEach(function(e){e.style.display=\'none\';});this.style.display=\'none\';document.getElementById(\'mas-'+uid+'\').style.display=\'\'" style="display:none;margin-top:6px;font-family:Outfit,sans-serif;font-size:9px;font-weight:700;color:var(--gris);background:none;border:none;cursor:pointer;padding:0;letter-spacing:.3px">▲ Ver menos</button>'
     : '';
   return '<div class="donut-wrap">'+
     '<div class="donut-title">Participación por hostal</div>'+
