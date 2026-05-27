@@ -1,94 +1,533 @@
 {
-  "meta": {
-    "titulo": "Cumplimiento Comercial — Agencias & Grupos",
-    "generado": "2026-04-26T00:00:00.000Z",
-    "meses": ["Ene26", "Feb26", "Mar26", "Abr26"],
-    "mes_actual": "Abr26"
-  },
-  "master": [
-    { "pais": "colombia",  "operacion": "Bogotá",           "orden": 1, "activo": true },
-    { "pais": "colombia",  "operacion": "Cartagena Centro", "orden": 2, "activo": true },
-    { "pais": "colombia",  "operacion": "Cartagena Get.",   "orden": 3, "activo": true },
-    { "pais": "colombia",  "operacion": "Medellín",         "orden": 4, "activo": true },
-    { "pais": "colombia",  "operacion": "Guatape",          "orden": 5, "activo": true },
-    { "pais": "colombia",  "operacion": "Salento",          "orden": 6, "activo": true },
-    { "pais": "colombia",  "operacion": "Cali",             "orden": 7, "activo": true },
-    { "pais": "colombia",  "operacion": "San Andrés",       "orden": 8, "activo": true },
-    { "pais": "colombia",  "operacion": "Santa Marta",      "orden": 9, "activo": true },
-    { "pais": "colombia",  "operacion": "Tayrona",          "orden": 10,"activo": true },
-    { "pais": "peru",      "operacion": "Cusco",            "orden": 1, "activo": true },
-    { "pais": "peru",      "operacion": "Arequipa",         "orden": 2, "activo": true },
-    { "pais": "peru",      "operacion": "Lima",             "orden": 3, "activo": true },
-    { "pais": "peru",      "operacion": "Huacachina",       "orden": 4, "activo": true },
-    { "pais": "peru",      "operacion": "Paracas",          "orden": 5, "activo": true },
-    { "pais": "mexico",    "operacion": "Oaxaca",           "orden": 1, "activo": true },
-    { "pais": "mexico",    "operacion": "Puerto Escondido", "orden": 2, "activo": true },
-    { "pais": "mexico",    "operacion": "Bacalar",          "orden": 3, "activo": true },
-    { "pais": "mexico",    "operacion": "CDMX",             "orden": 4, "activo": true },
-    { "pais": "mexico",    "operacion": "Sayulita",         "orden": 5, "activo": true },
-    { "pais": "ecuador",   "operacion": "Quito",            "orden": 1, "activo": true },
-    { "pais": "panama",    "operacion": "Casco Viejo",      "orden": 1, "activo": true },
-    { "pais": "costarica", "operacion": "San José",         "orden": 1, "activo": true },
-    { "pais": "costarica", "operacion": "La Fortuna",       "orden": 2, "activo": true },
-    { "pais": "argentina", "operacion": "Buenos Aires",     "orden": 1, "activo": true },
-    { "pais": "argentina", "operacion": "Calafate",         "orden": 2, "activo": true },
-    { "pais": "uruguay",   "operacion": "Montevideo",       "orden": 1, "activo": true },
-    { "pais": "uruguay",   "operacion": "Colonia",          "orden": 2, "activo": true },
-    { "pais": "uruguay",   "operacion": "Col. Posada",      "orden": 3, "activo": true }
-  ],
+  "updated": "2026-05-27T06:45:42.938Z",
   "paises": {
-    "colombia": [
-      { "operacion": "Bogotá",           "meses": { "Ene26": {"real":8200,"objetivo":9500,"anterior":11000}, "Feb26": {"real":9100,"objetivo":9800,"anterior":12000}, "Mar26": {"real":9800,"objetivo":10000,"anterior":13500}, "Abr26": {"real":10299.55,"objetivo":10368.22,"anterior":14284.30} } },
-      { "operacion": "Cartagena Centro", "meses": { "Ene26": {"real":1200,"objetivo":2000,"anterior":3500},  "Feb26": {"real":1000,"objetivo":2100,"anterior":4000},  "Mar26": {"real":950,"objetivo":2200,"anterior":4500},  "Abr26": {"real":889.94,"objetivo":2514.78,"anterior":5033.57} } },
-      { "operacion": "Cartagena Get.",   "meses": { "Ene26": {"real":25000,"objetivo":14000,"anterior":5000},"Feb26": {"real":28000,"objetivo":14500,"anterior":5200},"Mar26": {"real":32000,"objetivo":15000,"anterior":5800},"Abr26": {"real":36844.26,"objetivo":16379.82,"anterior":6112.09} } },
-      { "operacion": "Medellín",         "meses": { "Ene26": {"real":28000,"objetivo":25000,"anterior":7500},"Feb26": {"real":31000,"objetivo":26000,"anterior":8000},"Mar26": {"real":35000,"objetivo":27000,"anterior":8800},"Abr26": {"real":39308.26,"objetivo":29669.54,"anterior":9620.28} } },
-      { "operacion": "Guatape",          "meses": { "Ene26": {"real":1200,"objetivo":2800,"anterior":200},   "Feb26": {"real":1400,"objetivo":2900,"anterior":220},   "Mar26": {"real":1600,"objetivo":3100,"anterior":250},   "Abr26": {"real":1864.40,"objetivo":3338.84,"anterior":272.78} } },
-      { "operacion": "Salento",          "meses": { "Ene26": {"real":7000,"objetivo":8500,"anterior":4200},  "Feb26": {"real":7500,"objetivo":8800,"anterior":4500},  "Mar26": {"real":8200,"objetivo":9000,"anterior":4800},  "Abr26": {"real":9409.86,"objetivo":9708.09,"anterior":5427.18} } },
-      { "operacion": "Cali",             "meses": { "Ene26": {"real":300,"objetivo":900,"anterior":600},     "Feb26": {"real":250,"objetivo":950,"anterior":650},     "Mar26": {"real":200,"objetivo":1000,"anterior":700},    "Abr26": {"real":181.95,"objetivo":1139.33,"anterior":839.01} } },
-      { "operacion": "San Andrés",       "meses": { "Ene26": {"real":200,"objetivo":450,"anterior":600},     "Feb26": {"real":180,"objetivo":480,"anterior":650},     "Mar26": {"real":150,"objetivo":500,"anterior":700},     "Abr26": {"real":137.73,"objetivo":557.73,"anterior":854.71} } },
-      { "operacion": "Santa Marta",      "meses": { "Ene26": {"real":3500,"objetivo":3500,"anterior":5500},  "Feb26": {"real":3200,"objetivo":3600,"anterior":5200},  "Mar26": {"real":2900,"objetivo":3800,"anterior":5000},  "Abr26": {"real":2568.38,"objetivo":4060.64,"anterior":4890.44} } },
-      { "operacion": "Tayrona",          "meses": { "Ene26": {"real":15000,"objetivo":14000,"anterior":18000},"Feb26": {"real":14000,"objetivo":14500,"anterior":19000},"Mar26": {"real":13500,"objetivo":15000,"anterior":20000},"Abr26": {"real":13032.99,"objetivo":16607.76,"anterior":21204.49} } },
-      { "operacion": "COLOMBIA",         "meses": { "Ene26": {"real":89600,"objetivo":80650,"anterior":56100},"Feb26": {"real":95630,"objetivo":83630,"anterior":59420},"Mar26": {"real":104300,"objetivo":86600,"anterior":63050},"Abr26": {"real":114537.32,"objetivo":94344.75,"anterior":68538.86} } }
-    ],
-    "peru": [
-      { "operacion": "Cusco",      "meses": { "Ene26": {"real":45000,"objetivo":42000,"anterior":25000},"Feb26": {"real":50000,"objetivo":44000,"anterior":28000},"Mar26": {"real":55000,"objetivo":47000,"anterior":31000},"Abr26": {"real":60927.94,"objetivo":51832.63,"anterior":34173.53} } },
-      { "operacion": "Arequipa",   "meses": { "Ene26": {"real":0,"objetivo":2500,"anterior":0},         "Feb26": {"real":0,"objetivo":2700,"anterior":0},         "Mar26": {"real":0,"objetivo":2800,"anterior":0},         "Abr26": {"real":0,"objetivo":3000.00,"anterior":0} } },
-      { "operacion": "Lima",       "meses": { "Ene26": {"real":14000,"objetivo":17000,"anterior":3500}, "Feb26": {"real":16000,"objetivo":18000,"anterior":4000}, "Mar26": {"real":18000,"objetivo":19500,"anterior":4500}, "Abr26": {"real":21992.94,"objetivo":21332.26,"anterior":5131.47} } },
-      { "operacion": "Huacachina", "meses": { "Ene26": {"real":20000,"objetivo":16000,"anterior":9000}, "Feb26": {"real":22000,"objetivo":17000,"anterior":10000},"Mar26": {"real":25000,"objetivo":18000,"anterior":11000},"Abr26": {"real":28717.35,"objetivo":19636.45,"anterior":12604.12} } },
-      { "operacion": "Paracas",    "meses": { "Ene26": {"real":4500,"objetivo":3800,"anterior":5500},   "Feb26": {"real":4000,"objetivo":3900,"anterior":5200},   "Mar26": {"real":3600,"objetivo":4100,"anterior":5000},   "Abr26": {"real":3197.06,"objetivo":4465.31,"anterior":4817.65} } },
-      { "operacion": "PERÚ",       "meses": { "Ene26": {"real":83500,"objetivo":81300,"anterior":43000},"Feb26": {"real":92000,"objetivo":85600,"anterior":47200},"Mar26": {"real":101600,"objetivo":91400,"anterior":51500},"Abr26": {"real":114835.29,"objetivo":100266.64,"anterior":56726.76} } }
-    ],
-    "mexico": [
-      { "operacion": "Oaxaca",           "meses": { "Ene26": {"real":3500,"objetivo":6500,"anterior":800},  "Feb26": {"real":3000,"objetivo":7000,"anterior":600},  "Mar26": {"real":2500,"objetivo":7500,"anterior":400},  "Abr26": {"real":2035.20,"objetivo":7917.68,"anterior":385.50} } },
-      { "operacion": "Puerto Escondido", "meses": { "Ene26": {"real":900,"objetivo":6500,"anterior":800},   "Feb26": {"real":800,"objetivo":7000,"anterior":700},   "Mar26": {"real":700,"objetivo":7500,"anterior":650},   "Abr26": {"real":560.50,"objetivo":7947.00,"anterior":601.93} } },
-      { "operacion": "Bacalar",          "meses": { "Ene26": {"real":2000,"objetivo":13000,"anterior":0},   "Feb26": {"real":1800,"objetivo":13500,"anterior":0},   "Mar26": {"real":1500,"objetivo":14000,"anterior":0},   "Abr26": {"real":1161.50,"objetivo":15373.82,"anterior":0} } },
-      { "operacion": "CDMX",             "meses": { "Ene26": {"real":5000,"objetivo":13000,"anterior":9000},"Feb26": {"real":3000,"objetivo":13500,"anterior":8500},"Mar26": {"real":1500,"objetivo":14000,"anterior":8200},"Abr26": {"real":812.90,"objetivo":15862.99,"anterior":8092.45} } },
-      { "operacion": "Sayulita",         "meses": { "Ene26": {"real":1500,"objetivo":6000,"anterior":3500}, "Feb26": {"real":800,"objetivo":6500,"anterior":3200},  "Mar26": {"real":200,"objetivo":7000,"anterior":3000},  "Abr26": {"real":0,"objetivo":7686.91,"anterior":2728.28} } },
-      { "operacion": "MÉXICO",           "meses": { "Ene26": {"real":12900,"objetivo":45000,"anterior":14100},"Feb26": {"real":9400,"objetivo":47500,"anterior":13000},"Mar26": {"real":6400,"objetivo":50000,"anterior":12250},"Abr26": {"real":4570.10,"objetivo":54788.40,"anterior":11808.15} } }
-    ],
-    "ecuador": [
-      { "operacion": "Quito",   "meses": { "Ene26": {"real":5000,"objetivo":12000,"anterior":8000},"Feb26": {"real":3500,"objetivo":12500,"anterior":7500},"Mar26": {"real":2200,"objetivo":13000,"anterior":7000},"Abr26": {"real":1548.00,"objetivo":14106.00,"anterior":7374.00} } },
-      { "operacion": "ECUADOR", "meses": { "Ene26": {"real":5000,"objetivo":12000,"anterior":8000},"Feb26": {"real":3500,"objetivo":12500,"anterior":7500},"Mar26": {"real":2200,"objetivo":13000,"anterior":7000},"Abr26": {"real":1548.00,"objetivo":14106.00,"anterior":7374.00} } }
-    ],
-    "panama": [
-      { "operacion": "Casco Viejo", "meses": { "Ene26": {"real":5000,"objetivo":24000,"anterior":0},"Feb26": {"real":4000,"objetivo":25000,"anterior":0},"Mar26": {"real":3000,"objetivo":26000,"anterior":0},"Abr26": {"real":2038.00,"objetivo":28213.20,"anterior":0} } },
-      { "operacion": "PANAMÁ",      "meses": { "Ene26": {"real":5000,"objetivo":24000,"anterior":0},"Feb26": {"real":4000,"objetivo":25000,"anterior":0},"Mar26": {"real":3000,"objetivo":26000,"anterior":0},"Abr26": {"real":2038.00,"objetivo":28213.20,"anterior":0} } }
-    ],
-    "costarica": [
-      { "operacion": "San José",   "meses": { "Ene26": {"real":9000,"objetivo":12000,"anterior":0},"Feb26": {"real":10000,"objetivo":12500,"anterior":0},"Mar26": {"real":11000,"objetivo":13000,"anterior":0},"Abr26": {"real":12199.00,"objetivo":14161.05,"anterior":0} } },
-      { "operacion": "La Fortuna", "meses": { "Ene26": {"real":3000,"objetivo":14000,"anterior":0},"Feb26": {"real":2500,"objetivo":15000,"anterior":0},"Mar26": {"real":2000,"objetivo":16000,"anterior":0},"Abr26": {"real":1748.00,"objetivo":17307.95,"anterior":0} } },
-      { "operacion": "COSTA RICA", "meses": { "Ene26": {"real":12000,"objetivo":26000,"anterior":0},"Feb26": {"real":12500,"objetivo":27500,"anterior":0},"Mar26": {"real":13000,"objetivo":29000,"anterior":0},"Abr26": {"real":13947.00,"objetivo":31469.00,"anterior":0} } }
-    ],
-    "argentina": [
-      { "operacion": "Buenos Aires", "meses": { "Ene26": {"real":2000,"objetivo":6000,"anterior":12000},"Feb26": {"real":1000,"objetivo":6500,"anterior":11000},"Mar26": {"real":500,"objetivo":6800,"anterior":10500},"Abr26": {"real":0,"objetivo":7162.80,"anterior":10090.00} } },
-      { "operacion": "Calafate",     "meses": { "Ene26": {"real":3500,"objetivo":3200,"anterior":7000},"Feb26": {"real":2500,"objetivo":3400,"anterior":6500},"Mar26": {"real":1800,"objetivo":3600,"anterior":6000},"Abr26": {"real":1066.00,"objetivo":3932.40,"anterior":5624.00} } },
-      { "operacion": "ARGENTINA",    "meses": { "Ene26": {"real":5500,"objetivo":9200,"anterior":19000},"Feb26": {"real":3500,"objetivo":9900,"anterior":17500},"Mar26": {"real":2300,"objetivo":10400,"anterior":16500},"Abr26": {"real":1066.00,"objetivo":11095.20,"anterior":15714.00} } }
-    ],
-    "uruguay": [
-      { "operacion": "Montevideo",  "meses": { "Ene26": {"real":2500,"objetivo":2400,"anterior":1200},"Feb26": {"real":2800,"objetivo":2600,"anterior":1400},"Mar26": {"real":3200,"objetivo":2700,"anterior":1600},"Abr26": {"real":3967.50,"objetivo":2908.20,"anterior":1760.45} } },
-      { "operacion": "Colonia",     "meses": { "Ene26": {"real":800,"objetivo":1400,"anterior":2500},"Feb26": {"real":700,"objetivo":1500,"anterior":2300},"Mar26": {"real":600,"objetivo":1600,"anterior":2200},"Abr26": {"real":495.00,"objetivo":1674.50,"anterior":2196.60} } },
-      { "operacion": "Col. Posada", "meses": { "Ene26": {"real":0,"objetivo":550,"anterior":0},"Feb26": {"real":0,"objetivo":600,"anterior":0},"Mar26": {"real":0,"objetivo":630,"anterior":0},"Abr26": {"real":0,"objetivo":674.00,"anterior":0} } },
-      { "operacion": "URUGUAY",     "meses": { "Ene26": {"real":3300,"objetivo":4350,"anterior":3700},"Feb26": {"real":3500,"objetivo":4700,"anterior":3700},"Mar26": {"real":3800,"objetivo":4930,"anterior":3800},"Abr26": {"real":4462.50,"objetivo":5256.70,"anterior":3957.05} } }
-    ]
+    "Colombia": {
+      "nombre": "Colombia",
+      "emoji": "🇨🇴",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 114537.32,
+        "anterior": 68538.85,
+        "objetivo": 94344.75,
+        "varYoY": 0.67,
+        "varObj": 1.21
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Bogotá Hostel & Spa",
+          "short": "Bogotá",
+          "meses": {
+            "Abr26": {
+              "real": 10299.55,
+              "anterior": 14284.3,
+              "objetivo": 10368.22,
+              "varYoY": -0.28,
+              "varObj": 0.99
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Cartagena - Centro Hostel",
+          "short": "Cartagena Centro",
+          "meses": {
+            "Abr26": {
+              "real": 889.94,
+              "anterior": 5033.57,
+              "objetivo": 2514.78,
+              "varYoY": -0.82,
+              "varObj": 0.35
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Cartagena - Getsemaní Hostel",
+          "short": "Cartagena Get.",
+          "meses": {
+            "Abr26": {
+              "real": 36844.26,
+              "anterior": 6112.09,
+              "objetivo": 16379.82,
+              "varYoY": 5.03,
+              "varObj": 2.25
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Medellín Hostel",
+          "short": "Medellín",
+          "meses": {
+            "Abr26": {
+              "real": 39308.26,
+              "anterior": 9620.28,
+              "objetivo": 29669.54,
+              "varYoY": 3.09,
+              "varObj": 1.32
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Guatapé Hostel & Lake Club",
+          "short": "Guatapé",
+          "meses": {
+            "Abr26": {
+              "real": 1864.4,
+              "anterior": 272.78,
+              "objetivo": 3338.84,
+              "varYoY": 5.83,
+              "varObj": 0.56
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Salento Hostel",
+          "short": "Salento",
+          "meses": {
+            "Abr26": {
+              "real": 9409.86,
+              "anterior": 5427.18,
+              "objetivo": 9708.09,
+              "varYoY": 0.73,
+              "varObj": 0.97
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Cali Hostel & Salsa School",
+          "short": "Cali",
+          "meses": {
+            "Abr26": {
+              "real": 181.95,
+              "anterior": 839.01,
+              "objetivo": 1139.33,
+              "varYoY": -0.78,
+              "varObj": 0.16
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero San Andrés Hostel",
+          "short": "San Andrés",
+          "meses": {
+            "Abr26": {
+              "real": 137.73,
+              "anterior": 854.71,
+              "objetivo": 557.73,
+              "varYoY": -0.84,
+              "varObj": 0.25
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Santa Marta Hostel",
+          "short": "Santa Marta",
+          "meses": {
+            "Abr26": {
+              "real": 2568.38,
+              "anterior": 4890.44,
+              "objetivo": 4060.64,
+              "varYoY": -0.47,
+              "varObj": 0.63
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Tayrona Hostel & Ecohabs",
+          "short": "Tayrona",
+          "meses": {
+            "Abr26": {
+              "real": 13032.99,
+              "anterior": 21204.49,
+              "objetivo": 16607.76,
+              "varYoY": -0.39,
+              "varObj": 0.78
+            }
+          }
+        }
+      ]
+    },
+    "Peru": {
+      "nombre": "Perú",
+      "emoji": "🇵🇪",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 114835.29,
+        "anterior": 56726.77,
+        "objetivo": 100266.65,
+        "varYoY": 1.02,
+        "varObj": 1.15
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Cusco Hostel",
+          "short": "Cusco",
+          "meses": {
+            "Abr26": {
+              "real": 60927.94,
+              "anterior": 34173.53,
+              "objetivo": 51832.63,
+              "varYoY": 0.78,
+              "varObj": 1.18
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Arequipa Hostel",
+          "short": "Arequipa",
+          "meses": {
+            "Abr26": {
+              "real": 0,
+              "anterior": 0,
+              "objetivo": 3000,
+              "varYoY": null,
+              "varObj": 0
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Lima - Barranco Hostel",
+          "short": "Lima",
+          "meses": {
+            "Abr26": {
+              "real": 21992.94,
+              "anterior": 5131.47,
+              "objetivo": 21332.26,
+              "varYoY": 3.29,
+              "varObj": 1.03
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Huacachina Hostel",
+          "short": "Huacachina",
+          "meses": {
+            "Abr26": {
+              "real": 28717.35,
+              "anterior": 12604.12,
+              "objetivo": 19636.45,
+              "varYoY": 1.28,
+              "varObj": 1.46
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Paracas Hostel",
+          "short": "Paracas",
+          "meses": {
+            "Abr26": {
+              "real": 3197.06,
+              "anterior": 4817.65,
+              "objetivo": 4465.31,
+              "varYoY": -0.34,
+              "varObj": 0.72
+            }
+          }
+        }
+      ]
+    },
+    "Mexico": {
+      "nombre": "México",
+      "emoji": "🇲🇽",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 4570.1,
+        "anterior": 11808.16,
+        "objetivo": 54788.4,
+        "varYoY": -0.61,
+        "varObj": 0.08
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Oaxaca Hostel",
+          "short": "Oaxaca",
+          "meses": {
+            "Abr26": {
+              "real": 2035.2,
+              "anterior": 385.5,
+              "objetivo": 7917.68,
+              "varYoY": 4.28,
+              "varObj": 0.26
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Puerto Escondido Hostel",
+          "short": "Puerto Escondido",
+          "meses": {
+            "Abr26": {
+              "real": 560.5,
+              "anterior": 601.93,
+              "objetivo": 7947,
+              "varYoY": -0.07,
+              "varObj": 0.07
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Bacalar Hostel",
+          "short": "Bacalar",
+          "meses": {
+            "Abr26": {
+              "real": 1161.5,
+              "anterior": 0,
+              "objetivo": 15373.82,
+              "varYoY": null,
+              "varObj": 0.08
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero CDMX - Centro Hostel",
+          "short": "CDMX",
+          "meses": {
+            "Abr26": {
+              "real": 812.9,
+              "anterior": 8092.45,
+              "objetivo": 15862.99,
+              "varYoY": -0.9,
+              "varObj": 0.05
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Sayulita Hostel",
+          "short": "Sayulita",
+          "meses": {
+            "Abr26": {
+              "real": 0,
+              "anterior": 2728.28,
+              "objetivo": 7686.91,
+              "varYoY": -1,
+              "varObj": 0
+            }
+          }
+        }
+      ]
+    },
+    "Ecuador": {
+      "nombre": "Ecuador",
+      "emoji": "🇪🇨",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 1548,
+        "anterior": 7374,
+        "objetivo": 14106,
+        "varYoY": -0.79,
+        "varObj": 0.11
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Quito Hostel",
+          "short": "Quito",
+          "meses": {
+            "Abr26": {
+              "real": 1548,
+              "anterior": 7374,
+              "objetivo": 14106,
+              "varYoY": -0.79,
+              "varObj": 0.11
+            }
+          }
+        }
+      ]
+    },
+    "Panama": {
+      "nombre": "Panamá",
+      "emoji": "🇵🇦",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 2038,
+        "anterior": 0,
+        "objetivo": 28213.2,
+        "varYoY": null,
+        "varObj": 0.07
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Casco Viejo Hostel",
+          "short": "Casco Viejo",
+          "meses": {
+            "Abr26": {
+              "real": 2038,
+              "anterior": 0,
+              "objetivo": 28213.2,
+              "varYoY": null,
+              "varObj": 0.07
+            }
+          }
+        }
+      ]
+    },
+    "CostaRica": {
+      "nombre": "Costa Rica",
+      "emoji": "🇨🇷",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 13947,
+        "anterior": 0,
+        "objetivo": 31469,
+        "varYoY": null,
+        "varObj": 0.44
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero San José Hostel",
+          "short": "San José",
+          "meses": {
+            "Abr26": {
+              "real": 12199,
+              "anterior": 0,
+              "objetivo": 14161.05,
+              "varYoY": null,
+              "varObj": 0.86
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero La Fortuna Hostel Colombia",
+          "short": "La Fortuna",
+          "meses": {
+            "Abr26": {
+              "real": 1748,
+              "anterior": 0,
+              "objetivo": 17307.95,
+              "varYoY": null,
+              "varObj": 0.1
+            }
+          }
+        }
+      ]
+    },
+    "Argentina": {
+      "nombre": "Argentina",
+      "emoji": "🇦🇷",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 0,
+        "anterior": 10090,
+        "objetivo": 7162.8,
+        "varYoY": -1,
+        "varObj": 0
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Buenos Aires Hostel",
+          "short": "Buenos Aires",
+          "meses": {
+            "Abr26": {
+              "real": 0,
+              "anterior": 10090,
+              "objetivo": 7162.8,
+              "varYoY": -1,
+              "varObj": 0
+            }
+          }
+        }
+      ]
+    },
+    "Uruguay": {
+      "nombre": "Uruguay",
+      "emoji": "🇺🇾",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 4462.5,
+        "anterior": 3957.05,
+        "objetivo": 5256.7,
+        "varYoY": 0.13,
+        "varObj": 0.85
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Montevideo Hostel",
+          "short": "Montevideo",
+          "meses": {
+            "Abr26": {
+              "real": 3967.5,
+              "anterior": 1760.45,
+              "objetivo": 2908.2,
+              "varYoY": 1.25,
+              "varObj": 1.36
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Colonia Hostel",
+          "short": "Colonia",
+          "meses": {
+            "Abr26": {
+              "real": 495,
+              "anterior": 2196.6,
+              "objetivo": 1674.5,
+              "varYoY": -0.77,
+              "varObj": 0.3
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Posada Hostel",
+          "short": "Col. Posada",
+          "meses": {
+            "Abr26": {
+              "real": 0,
+              "anterior": 0,
+              "objetivo": 674,
+              "varYoY": null,
+              "varObj": 0
+            }
+          }
+        }
+      ]
+    },
+    "USA": {
+      "nombre": "USA",
+      "emoji": "🇺🇸",
+      "meses": [
+        "Abr26"
+      ],
+      "total": {
+        "real": 0,
+        "anterior": 19139,
+        "objetivo": 0,
+        "varYoY": -1,
+        "varObj": null
+      },
+      "hostales": [
+        {
+          "nombre_completo": "Viajero Miami Hostel",
+          "short": "Miami",
+          "meses": {
+            "Abr26": {
+              "real": 0,
+              "anterior": 19139,
+              "objetivo": 0,
+              "varYoY": -1,
+              "varObj": null
+            }
+          }
+        }
+      ]
+    }
+  },
+  "cadena": {
+    "real": 255938.21,
+    "anterior": 177633.83,
+    "objetivo": 335607.5,
+    "varYoY": 0.44,
+    "varObj": 0.76
   }
 }
