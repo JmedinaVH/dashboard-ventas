@@ -274,6 +274,11 @@ function pct(n) {
   if (n == null) return '—';
   return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%';
 }
+function pctYoY(n) {
+  // Muestra como cumplimiento: real/anterior (no la variación)
+  if (n == null) return '—';
+  return ((1 + n) * 100).toFixed(1) + '%';
+}
 function badgeHtml(v) {
   if (v == null) return '<span class="badge b-blue">Nuevo</span>';
   var p = (v * 100).toFixed(0) + '%';
@@ -483,7 +488,7 @@ function renderCadena() {
       '<div class="kpi-box" style="--kc:var(--blue)">' +
         '<div class="kpi-label">Año anterior</div>' +
         '<div class="kpi-val">' + fmt(c.anterior) + '</div>' +
-        '<div class="kpi-sub" style="color:' + yoyColorC + ';font-weight:700">YoY ' + pct(c.varYoY) + '</div></div>' +
+        '<div class="kpi-sub" style="color:' + yoyColorC + ';font-weight:700">vs Año ant. ' + pctYoY(c.varYoY) + '</div></div>' +
       '<div class="kpi-box" style="--kc:#8b5cf6">' +
         '<div class="kpi-label">Cumplimiento</div>' +
         '<div class="kpi-val" style="color:' + colorFor(c.varObj) + '">' + (c.varObj != null ? (c.varObj * 100).toFixed(1) + '%' : '—') + '</div>' +
@@ -508,7 +513,7 @@ function renderCadena() {
         '<div><div class="cf-label">Real</div><div class="cf-val coral">' + fmt(t.real) + '</div></div>' +
         '<div><div class="cf-label">Objetivo</div><div class="cf-val">' + fmt(t.objetivo) + '</div></div>' +
         '<div><div class="cf-label">Año anterior</div><div class="cf-val">' + fmt(t.anterior) + '</div></div>' +
-        '<div><div class="cf-label">YoY</div><div class="cf-val" style="' + yoyColor + '">' + pct(t.varYoY) + '</div></div>' +
+        '<div><div class="cf-label">vs Año ant.</div><div class="cf-val" style="' + yoyColor + '">' + pctYoY(t.varYoY) + '</div></div>' +
       '</div>' +
       '<div class="bar-track"><div class="bar-fill" style="width:' + fill + '%;background:' + colorFor(t.varObj) + '"></div></div>' +
       '<div class="bar-meta"><span>' + (t.varObj != null ? (t.varObj * 100).toFixed(1) + '% del objetivo' : 'Sin base anterior') + '</span></div>' +
@@ -559,7 +564,7 @@ function renderPais(key) {
       '<div class="kpi-box" style="--kc:var(--blue)">' +
         '<div class="kpi-label">Año anterior</div>' +
         '<div class="kpi-val">' + fmt(t && t.anterior) + '</div>' +
-        '<div class="kpi-sub" style="color:' + yoyColor + ';font-weight:700">YoY ' + pct(t && t.varYoY) + '</div></div>' +
+        '<div class="kpi-sub" style="color:' + yoyColor + ';font-weight:700">vs Año ant. ' + pctYoY(t && t.varYoY) + '</div></div>' +
       '<div class="kpi-box" style="--kc:#8b5cf6">' +
         '<div class="kpi-label">Cumplimiento</div>' +
         '<div class="kpi-val" style="color:' + colorFor(t && t.varObj) + '">' + (t && t.varObj != null ? (t.varObj * 100).toFixed(1) + '%' : '—') + '</div>' +
@@ -590,7 +595,7 @@ function renderPais(key) {
     '<div class="sec-hdr"><h2>Detalle por hostal</h2><div class="linea"></div></div>' +
     '<div class="table-wrap"><table class="detail-table">' +
     '<thead><tr>' +
-      '<th>Hostal</th><th>Real (USD)</th><th>Año ant.</th><th>Objetivo</th><th>Var YoY</th><th>Cumplimiento</th>' +
+      '<th>Hostal</th><th>Real (USD)</th><th>Año ant.</th><th>Objetivo</th><th>vs Año ant.</th><th>vs Objetivo</th>' +
     '</tr></thead><tbody>';
 
   p.hostales.forEach(function(h) {
@@ -602,7 +607,7 @@ function renderPais(key) {
       '<td>' + fmt(m.real) + '</td>' +
       '<td>' + fmt(m.anterior) + '</td>' +
       '<td>' + fmt(m.objetivo) + '</td>' +
-      '<td style="font-weight:700;' + vc + '">' + pct(m.varYoY) + '</td>' +
+      '<td style="font-weight:700;' + vc + '">' + pctYoY(m.varYoY) + '</td>' +
       '<td>' + badgeHtml(m.varObj) +
         '<div style="margin-top:5px"><div class="bar-track" style="width:80px">' +
           '<div class="bar-fill" style="width:' + fill + '%;background:' + colorFor(m.varObj) + '"></div>' +
@@ -616,7 +621,7 @@ function renderPais(key) {
     '<td>' + fmt(t && t.real) + '</td>' +
     '<td>' + fmt(t && t.anterior) + '</td>' +
     '<td>' + fmt(t && t.objetivo) + '</td>' +
-    '<td style="' + vc2 + '">' + pct(t && t.varYoY) + '</td>' +
+    '<td style="' + vc2 + '">' + pctYoY(t && t.varYoY) + '</td>' +
     '<td>' + badgeHtml(t && t.varObj) + '</td>' +
   '</tr></tfoot></table></div></div>';
 
