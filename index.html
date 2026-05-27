@@ -103,15 +103,20 @@ header{background:var(--dark);padding:0 36px;display:flex;align-items:center;jus
 /* BAR CHART */
 .chart-section{margin-top:24px;background:var(--cream);border-radius:var(--r);padding:18px 20px;}
 .chart-section h3{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.8px;margin-bottom:16px;}
-.bar-chart{display:flex;flex-direction:column;gap:9px;}
+.bar-chart{display:flex;flex-direction:column;gap:12px;}
 .bar-row{display:flex;align-items:center;gap:10px;}
-.bar-row .label{width:130px;font-size:11px;font-weight:600;text-align:right;color:var(--dark);}
-.bar-row .bars{flex:1;display:flex;flex-direction:column;gap:3px;}
-.bar-row .bar{height:10px;border-radius:99px;min-width:2px;transition:width .6s cubic-bezier(.4,0,.2,1);}
-.bar-row .val{font-size:11px;font-weight:700;color:var(--gris);width:72px;}
+.bar-row .label{width:130px;font-size:11px;font-weight:600;text-align:right;color:var(--dark);flex-shrink:0;}
+.bar-row .bars{flex:1;display:flex;flex-direction:column;gap:4px;}
+.bar-wrap{position:relative;display:flex;align-items:center;gap:7px;}
+.bar-wrap .bar{height:10px;border-radius:99px;min-width:2px;transition:width .6s cubic-bezier(.4,0,.2,1);cursor:pointer;position:relative;flex-shrink:0;}
+.bar-wrap .bar-lbl{font-size:10px;font-weight:700;color:var(--dark);white-space:nowrap;}
 .bar-real{background:var(--coral);}
 .bar-obj{background:#27ae60;}
 .bar-ant{background:var(--cd);}
+/* TOOLTIP */
+.bar-wrap .bar::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;font-size:10px;font-weight:600;font-family:'Outfit',sans-serif;padding:4px 9px;border-radius:7px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .16s;z-index:99;}
+.bar-wrap .bar::before{content:'';position:absolute;bottom:calc(100% + 1px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--dark);pointer-events:none;opacity:0;transition:opacity .16s;z-index:99;}
+.bar-wrap .bar:hover::after,.bar-wrap .bar:hover::before{opacity:1;}
 .legend{display:flex;gap:14px;margin-top:12px;font-size:10px;font-weight:600;color:var(--gris);}
 .legend span{display:flex;align-items:center;gap:5px;}
 .legend-dot{display:inline-block;width:10px;height:10px;border-radius:3px;}
@@ -291,11 +296,9 @@ function renderCadena() {
     <div class="bar-row">
       <div class="label">${p.emoji} ${p.nombre}</div>
       <div class="bars">
-        <div class="bar bar-real" style="width:${w(t.real)}%" title="Real: ${fmt(t.real)}"></div>
-        <div class="bar bar-obj"  style="width:${w(t.objetivo)}%" title="Obj: ${fmt(t.objetivo)}"></div>
-        <div class="bar bar-ant"  style="width:${w(t.anterior)}%" title="Ant: ${fmt(t.anterior)}"></div>
-      </div>
-      <div class="val">${fmt(t.real)}</div>
+        <div class="bar-wrap"><div class="bar bar-real" style="width:${w(t.real)}%" data-tip="Real: ${fmt(t.real)}"></div><span class="bar-lbl" style="color:var(--coral-d)">${fmt(t.real)}</span></div>
+        <div class="bar-wrap"><div class="bar bar-obj" style="width:${w(t.objetivo)}%" data-tip="Objetivo: ${fmt(t.objetivo)}"></div><span class="bar-lbl" style="color:#166534">${fmt(t.objetivo)}</span></div>
+        <div class="bar-wrap"><div class="bar bar-ant" style="width:${w(t.anterior)}%" data-tip="Año ant.: ${fmt(t.anterior)}"></div><span class="bar-lbl" style="color:var(--gris)">${fmt(t.anterior)}</span></div>
     </div>`;
   });
 
