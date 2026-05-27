@@ -120,15 +120,15 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 .leg-item{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--gris);}
 .leg-dot{width:12px;height:8px;border-radius:3px;flex-shrink:0;}
 /* DONUT */
-.donut-wrap{background:var(--surface);border-radius:var(--rl);border:1.5px solid var(--border);padding:20px 22px;}
+.donut-wrap{background:var(--surface);border-radius:var(--rl);border:1.5px solid var(--border);padding:20px 24px;margin-bottom:16px;}
 .donut-title{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
-.donut-inner{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
-.donut-legend{flex:1;min-width:160px;display:flex;flex-direction:column;gap:8px;}
+.donut-inner{display:flex;gap:24px;align-items:center;}
+.donut-legend{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px 16px;}
 .dl-item{display:flex;align-items:center;gap:8px;font-size:11px;}
 .dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .dl-name{flex:1;font-weight:600;color:var(--dark);}
-.dl-pct{font-weight:800;font-size:13px;min-width:40px;text-align:right;}
-.dl-val{font-size:10px;color:var(--gris);min-width:60px;text-align:right;}
+.dl-pct{font-weight:800;font-size:13px;min-width:38px;text-align:right;}
+.dl-val{font-size:10px;color:var(--gris);min-width:52px;text-align:right;}
 
 /* ── DETAIL TABLE ── */
 .table-wrap{overflow-x:auto;border-radius:var(--r);border:1.5px solid var(--border);}
@@ -319,6 +319,7 @@ function buildBarChart(rows, titleTxt) {
 function buildDonut(paisesData) {
   var COLORS = ['#F04B24','#27ae60','#0369a1','#854d0e','#8b5cf6','#10b981','#f59e0b','#6B3A28','#64748b'];
   var entries = Object.values(paisesData).filter(function(p) { return p.total && p.total.real > 0; });
+  entries.sort(function(a,b){ return a.total.real - b.total.real; }); // menor a mayor
   var total   = entries.reduce(function(s, p) { return s + p.total.real; }, 0);
   if (!total) return '';
 
@@ -451,7 +452,8 @@ function renderCadena() {
 
   /* Donut + Semáforo */
   html += '<div class="sec"><div class="sec-hdr"><h2>Distribución y estado por país</h2><div class="linea"></div></div>' +
-    '<div class="semaforo-grid" style="align-items:start">' + buildDonut(DATA.paises);
+    buildDonut(DATA.paises) +
+    '<div class="semaforo-grid">';
 
   Object.entries(DATA.paises).forEach(function(entry) {
     var key = entry[0], p = entry[1];
