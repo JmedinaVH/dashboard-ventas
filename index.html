@@ -476,7 +476,7 @@ function renderCadena() {
   if (!el) return;
   var c = DATA.cadena;
 
-  var kpiLabel = mesSel || 'Período';
+  var kpiLabel = mesSel ? 'YTD · ' + mesSel : 'YTD';
 
   var html = '';
 
@@ -486,7 +486,7 @@ function renderCadena() {
     '<div class="sec-hdr"><h2>Resumen de cadena</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
       '<div class="kpi-box" style="--kc:var(--coral)">' +
-        '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
+        '<div class="kpi-label">Real YTD</div>' +
         '<div class="kpi-val" style="color:var(--coral)">' + fmt(c.real) + '</div>' +
         '<div class="kpi-sub">USD total cadena</div></div>' +
       '<div class="kpi-box" style="--kc:#27ae60">' +
@@ -536,7 +536,7 @@ function renderCadena() {
     .map(function(p) { return { label: (p.emoji || '') + ' ' + p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
 
   html += '<div class="sec"><div class="sec-hdr"><h2>Real vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
-    buildBarChart(rows, 'Comparativo por país — ' + kpiLabel) +
+    buildBarChart(rows, 'Comparativo por país — YTD') +
   '</div>';
 
   el.innerHTML = html;
@@ -552,7 +552,7 @@ function renderPais(key) {
   var p = DATA.paises[key];
   if (!p || !p.hostales) { el.innerHTML = '<p style="color:var(--gris);padding:20px;">Sin datos.</p>'; return; }
   var t = p.total;
-  var kpiLabel = mesSel || 'Período';
+  var kpiLabel = mesSel ? 'YTD · ' + mesSel : 'YTD';
 
   var html = '';
 
@@ -562,7 +562,7 @@ function renderPais(key) {
     '<div class="sec-hdr"><h2>Resumen ' + p.nombre + '</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
       '<div class="kpi-box" style="--kc:var(--coral)">' +
-        '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
+        '<div class="kpi-label">Real YTD</div>' +
         '<div class="kpi-val" style="color:var(--coral)">' + fmt(t && t.real) + '</div>' +
         '<div class="kpi-sub">USD</div></div>' +
       '<div class="kpi-box" style="--kc:#27ae60">' +
@@ -587,7 +587,7 @@ function renderPais(key) {
 
   /* Donut + barras en dos columnas */
   var donutHtml = buildDonutHostales(p.hostales);
-  var barHtml2  = buildBarChart(bcRows, 'Real vs Objetivo vs Año anterior — ' + kpiLabel);
+  var barHtml2  = buildBarChart(bcRows, 'Real vs Objetivo vs Año anterior — YTD');
   if (donutHtml) {
     html += '<div class="sec">' +
       '<div class="sec-hdr"><h2>Distribución y comparativo por hostal</h2><div class="linea"></div></div>' +
@@ -699,7 +699,7 @@ window.addEventListener('DOMContentLoaded', function() {
       var sel = document.getElementById('mesSel');
       meses.forEach(function(m) {
         var o = document.createElement('option');
-        o.value = m; o.textContent = m;
+        o.value = m; o.textContent = 'YTD · ' + m;
         sel.appendChild(o);
       });
       sel.value = mesSel;
