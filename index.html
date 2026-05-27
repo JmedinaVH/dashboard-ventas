@@ -70,13 +70,12 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 
 /* ── KPI BOXES ── */
 .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;}
-.kpi-box{background:var(--surface);border-radius:var(--r);padding:18px 18px 16px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:box-shadow .18s;}
+.kpi-box{background:var(--surface);border-radius:var(--r);padding:20px 20px 18px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:box-shadow .18s;}
 .kpi-box:hover{box-shadow:var(--shm);}
 .kpi-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kc,var(--coral));border-radius:var(--r) var(--r) 0 0;}
-.kpi-glow{position:absolute;bottom:-14px;right:-14px;width:54px;height:54px;border-radius:50%;background:var(--kc,var(--coral));opacity:.06;pointer-events:none;}
-.kpi-label{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
-.kpi-val{font-size:26px;font-weight:800;line-height:1;color:var(--dark);margin-bottom:3px;}
-.kpi-sub{font-size:11px;color:var(--gris);line-height:1.4;}
+.kpi-label{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;}
+.kpi-val{font-size:28px;font-weight:800;line-height:1;color:var(--dark);margin-bottom:4px;}
+.kpi-sub{font-size:11px;color:var(--gris);line-height:1.4;font-weight:500;}
 
 /* ── BADGE ── */
 .badge{display:inline-flex;align-items:center;font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;}
@@ -140,7 +139,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 .detail-table tbody td:first-child{text-align:left;}
 .detail-table tbody tr:last-child td{border-bottom:none;}
 .detail-table tbody tr:hover td{background:var(--cream);}
-.detail-table tfoot td{padding:11px 13px;text-align:right;background:var(--ok-bg);font-weight:800;font-size:12px;border-top:2px solid var(--ok-light);}
+.detail-table tfoot td{padding:11px 13px;text-align:right;background:var(--dark);color:#fff;font-weight:800;font-size:12px;border-top:2px solid var(--dark);}
 .detail-table tfoot td:first-child{text-align:left;}
 .chip{background:var(--coral-soft);color:var(--coral-d);border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;display:inline-block;white-space:nowrap;}
 
@@ -381,37 +380,24 @@ function renderCadena() {
 
   var html = '';
 
-  /* Tabla resumen */
-  var yoyColorC = c.varYoY == null ? '' : c.varYoY >= 0 ? ' class="st-ok"' : ' class="st-err"';
-  html += '<div class="sec">' +
-    '<table class="summary-table">' +
-    '<thead><tr><th>Período</th><th>Real</th><th>Año anterior</th><th>Var. YoY</th><th>Objetivo</th><th>Cumplimiento</th></tr></thead>' +
-    '<tbody><tr>' +
-      '<td>' + kpiLabel + '</td>' +
-      '<td class="st-real">' + fmt(c.real) + '</td>' +
-      '<td>' + fmt(c.anterior) + '</td>' +
-      '<td' + yoyColorC + '>' + pct(c.varYoY) + '</td>' +
-      '<td>' + fmt(c.objetivo) + '</td>' +
-      '<td>' + badgeHtml(c.varObj) + '</td>' +
-    '</tr></tbody></table></div>';
-
-  /* KPIs */
+  /* KPIs cadena */
+  var yoyColorC = c.varYoY == null ? 'var(--dark)' : c.varYoY >= 0 ? 'var(--ok)' : 'var(--err)';
   html += '<div class="sec">' +
     '<div class="sec-hdr"><h2>Resumen de cadena</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
-      '<div class="kpi-box" style="--kc:var(--coral)"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:var(--coral)">' +
         '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
-        '<div class="kpi-val">' + fmt(c.real) + '</div>' +
+        '<div class="kpi-val" style="color:var(--coral)">' + fmt(c.real) + '</div>' +
         '<div class="kpi-sub">USD total cadena</div></div>' +
-      '<div class="kpi-box" style="--kc:#27ae60"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:#27ae60">' +
         '<div class="kpi-label">Objetivo</div>' +
         '<div class="kpi-val">' + fmt(c.objetivo) + '</div>' +
         '<div class="kpi-sub">Meta del período</div></div>' +
-      '<div class="kpi-box" style="--kc:var(--blue)"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:var(--blue)">' +
         '<div class="kpi-label">Año anterior</div>' +
         '<div class="kpi-val">' + fmt(c.anterior) + '</div>' +
-        '<div class="kpi-sub">YoY ' + pct(c.varYoY) + '</div></div>' +
-      '<div class="kpi-box" style="--kc:#8b5cf6"><div class="kpi-glow"></div>' +
+        '<div class="kpi-sub" style="color:' + yoyColorC + ';font-weight:700">YoY ' + pct(c.varYoY) + '</div></div>' +
+      '<div class="kpi-box" style="--kc:#8b5cf6">' +
         '<div class="kpi-label">Cumplimiento</div>' +
         '<div class="kpi-val" style="color:' + colorFor(c.varObj) + '">' + (c.varObj != null ? (c.varObj * 100).toFixed(1) + '%' : '—') + '</div>' +
         '<div class="kpi-sub">' + badgeHtml(c.varObj) + '</div></div>' +
@@ -475,19 +461,19 @@ function renderPais(key) {
   html += '<div class="sec">' +
     '<div class="sec-hdr"><h2>Resumen ' + p.nombre + '</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
-      '<div class="kpi-box" style="--kc:var(--coral)"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:var(--coral)">' +
         '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
-        '<div class="kpi-val">' + fmt(t && t.real) + '</div>' +
+        '<div class="kpi-val" style="color:var(--coral)">' + fmt(t && t.real) + '</div>' +
         '<div class="kpi-sub">USD</div></div>' +
-      '<div class="kpi-box" style="--kc:#27ae60"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:#27ae60">' +
         '<div class="kpi-label">Objetivo</div>' +
         '<div class="kpi-val">' + fmt(t && t.objetivo) + '</div>' +
         '<div class="kpi-sub">Meta del período</div></div>' +
-      '<div class="kpi-box" style="--kc:var(--blue)"><div class="kpi-glow"></div>' +
-        '<div class="kpi-label">YoY</div>' +
-        '<div class="kpi-val" style="color:' + yoyColor + '">' + pct(t && t.varYoY) + '</div>' +
-        '<div class="kpi-sub">vs año anterior</div></div>' +
-      '<div class="kpi-box" style="--kc:#8b5cf6"><div class="kpi-glow"></div>' +
+      '<div class="kpi-box" style="--kc:var(--blue)">' +
+        '<div class="kpi-label">Año anterior</div>' +
+        '<div class="kpi-val">' + fmt(t && t.anterior) + '</div>' +
+        '<div class="kpi-sub" style="color:' + yoyColor + ';font-weight:700">YoY ' + pct(t && t.varYoY) + '</div></div>' +
+      '<div class="kpi-box" style="--kc:#8b5cf6">' +
         '<div class="kpi-label">Cumplimiento</div>' +
         '<div class="kpi-val" style="color:' + colorFor(t && t.varObj) + '">' + (t && t.varObj != null ? (t.varObj * 100).toFixed(1) + '%' : '—') + '</div>' +
         '<div class="kpi-sub">' + badgeHtml(t && t.varObj) + '</div></div>' +
