@@ -171,6 +171,14 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 .cadena-grid{flex:1;}
 .cadena-grid .semaforo-grid{margin-bottom:0;}
 @media(max-width:860px){.cadena-layout{flex-direction:column;}.cadena-donut{width:100%;}}
+/* PAIS LAYOUT */
+.pais-layout{display:flex;gap:16px;align-items:stretch;}
+.pais-donut{flex-shrink:0;width:260px;display:flex;flex-direction:column;}
+.pais-donut .donut-wrap{height:100%;margin-bottom:0;display:flex;flex-direction:column;justify-content:flex-start;}
+.pais-donut .donut-inner{flex-direction:column;align-items:center;gap:12px;}
+.pais-donut .donut-legend{grid-template-columns:1fr;gap:5px;}
+.pais-bars{flex:1;}
+@media(max-width:860px){.pais-layout{flex-direction:column;}.pais-donut{width:100%;}}
 /* ── TOOLTIP JS ── */
 #vt{position:fixed;background:var(--dark);color:#fff;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;padding:5px 11px;border-radius:8px;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.35);z-index:9999;opacity:0;transition:opacity .12s;transform:translateX(-50%);}
 #vt.show{opacity:1;}
@@ -421,31 +429,30 @@ function buildDonutHostales(hostales) {
   }).filter(function(h){return h.real>0;});
   entries.sort(function(a,b){
     var va=a.varObj!=null?a.varObj:-999,vb=b.varObj!=null?b.varObj:-999;
-    return vb-va; // mayor a menor cumplimiento
+    return vb-va;
   });
   var total=entries.reduce(function(s,h){return s+h.real;},0);
   if(!total)return'';
-  var r=40,cx=50,cy=50,sw=18,circ=2*Math.PI*r,offset=0;
+  var r=52,cx=66,cy=66,sw=26,circ=2*Math.PI*r,offset=0;
   var segs=entries.map(function(p,i){
     var frac=p.real/total,dash=frac*circ,col=COLORS[i%COLORS.length];
     var s='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+col+'" stroke-width="'+sw+'" stroke-dasharray="'+dash.toFixed(2)+' '+(circ-dash+.5).toFixed(2)+'" stroke-dashoffset="'+(-(offset)).toFixed(2)+'" transform="rotate(-90 '+cx+' '+cy+')" style="cursor:pointer" data-tip="'+p.short+': '+fmt(p.real)+' ('+(frac*100).toFixed(1)+'%)"></circle>';
     offset+=dash;
     return{svg:s,p:p,frac:frac,col:col};
   });
-  var svgHtml='<svg width="100" height="100" viewBox="0 0 100 100">'+segs.map(function(s){return s.svg;}).join('')+'<text x="50" y="46" text-anchor="middle" font-family="Outfit,sans-serif" font-size="9" font-weight="700" fill="#7A6E68">Real</text><text x="50" y="59" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
+  var svgHtml='<svg width="132" height="132" viewBox="0 0 132 132">'+segs.map(function(s){return s.svg;}).join('')+'<text x="66" y="61" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#7A6E68">Real</text><text x="66" y="79" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
   var legHtml=segs.map(function(s){
-    return '<div style="display:flex;align-items:center;gap:4px">' +
-      '<div style="width:8px;height:8px;border-radius:50%;background:'+s.col+';flex-shrink:0"></div>' +
-      '<span style="font-size:10px;font-weight:600;color:var(--dark)">'+s.p.short+'</span>' +
-      '<span style="font-size:10px;font-weight:800;color:'+s.col+'">'+(s.frac*100).toFixed(1)+'%</span>' +
+    return '<div class="dl-item">'+
+      '<div class="dl-dot" style="background:'+s.col+'"></div>'+
+      '<span class="dl-name">'+s.p.short+'</span>'+
+      '<span class="dl-pct" style="color:'+s.col+'">'+(s.frac*100).toFixed(1)+'%</span>'+
+      '<span class="dl-val">'+fmtK(s.p.real)+'</span>'+
     '</div>';
   }).join('');
-  return '<div class="donut-wrap">' +
-    '<div class="donut-title">Participación por hostal</div>' +
-    '<div style="display:flex;flex-direction:column;align-items:center;gap:12px">' +
-      svgHtml +
-      '<div style="display:flex;flex-wrap:wrap;gap:5px 12px;justify-content:center">' + legHtml + '</div>' +
-    '</div></div>';
+  return '<div class="donut-wrap">'+
+    '<div class="donut-title">Participación por hostal</div>'+
+    '<div class="donut-inner"><div>'+svgHtml+'</div>'+
+    '<div class="donut-legend">'+legHtml+'</div></div></div>';
 }
 
 /* ══════════════════════════════════════════
@@ -567,15 +574,15 @@ function renderPais(key) {
 
   /* Donut + barras en dos columnas */
   var donutHtml = buildDonutHostales(p.hostales);
-  var hbarHtml  = buildHBarChart(bcRows, 'Real vs Objetivo vs Año anterior — ' + kpiLabel);
+  var barHtml2  = buildBarChart(bcRows, 'Real vs Objetivo vs Año anterior — ' + kpiLabel);
   if (donutHtml) {
     html += '<div class="sec">' +
       '<div class="sec-hdr"><h2>Distribución y comparativo por hostal</h2><div class="linea"></div></div>' +
-      '<div class="two-col">' + donutHtml + hbarHtml + '</div></div>';
+      '<div class="pais-layout"><div class="pais-donut">' + donutHtml + '</div><div class="pais-bars">' + barHtml2 + '</div></div></div>';
   } else {
     html += '<div class="sec">' +
       '<div class="sec-hdr"><h2>Comparativo por hostal</h2><div class="linea"></div></div>' +
-      hbarHtml + '</div>';
+      barHtml2 + '</div>';
   }
 
   /* Tabla detalle */
