@@ -174,10 +174,11 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 /* PAIS LAYOUT */
 .pais-layout{display:flex;gap:16px;align-items:stretch;}
 .pais-donut{flex-shrink:0;width:260px;display:flex;flex-direction:column;}
-.pais-donut .donut-wrap{height:100%;margin-bottom:0;display:flex;flex-direction:column;justify-content:flex-start;}
+.pais-donut .donut-wrap{flex:1;margin-bottom:0;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden;}
 .pais-donut .donut-inner{flex-direction:column;align-items:center;gap:12px;}
 .pais-donut .donut-legend{grid-template-columns:1fr;gap:5px;}
-.pais-bars{flex:1;}
+.pais-bars{flex:1;display:flex;flex-direction:column;}
+.pais-bars .chart-wrap{flex:1;margin-bottom:0;}
 @media(max-width:860px){.pais-layout{flex-direction:column;}.pais-donut{width:100%;}}
 /* ── TOOLTIP JS ── */
 #vt{position:fixed;background:var(--dark);color:#fff;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;padding:5px 11px;border-radius:8px;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.35);z-index:9999;opacity:0;transition:opacity .12s;transform:translateX(-50%);}
@@ -446,18 +447,24 @@ function buildDonutHostales(hostales) {
     return{svg:s,p:p,frac:frac,col:col};
   });
   var svgHtml='<svg width="132" height="132" viewBox="0 0 132 132">'+segs.map(function(s){return s.svg;}).join('')+'<text x="66" y="61" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#7A6E68">Real</text><text x="66" y="79" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
-  var legHtml=segs.map(function(s){
-    return '<div class="dl-item">'+
+  var MAX_V = 6;
+  var uid = 'dh' + Math.random().toString(36).substr(2,5);
+  var legHtml=segs.map(function(s,i){
+    var extra = i >= MAX_V ? ' class="dh-x-'+uid+'" style="display:none"' : '';
+    return '<div'+extra+' class="dl-item">'+
       '<div class="dl-dot" style="background:'+s.col+'"></div>'+
       '<span class="dl-name">'+s.p.short+'</span>'+
       '<span class="dl-pct" style="color:'+s.col+'">'+(s.frac*100).toFixed(1)+'%</span>'+
       '<span class="dl-val">'+fmtK(s.p.real)+'</span>'+
     '</div>';
   }).join('');
+  var verMasBtn = segs.length > MAX_V
+    ? '<button onclick="document.querySelectorAll(\'.dh-x-'+uid+'\').forEach(function(e){e.style.display=\'\';});this.style.display=\'none\'" style="margin-top:6px;font-family:Outfit,sans-serif;font-size:9px;font-weight:700;color:var(--coral);background:none;border:none;cursor:pointer;padding:0;letter-spacing:.3px">▼ Ver más ('+(segs.length-MAX_V)+')</button>'
+    : '';
   return '<div class="donut-wrap">'+
     '<div class="donut-title">Participación por hostal</div>'+
     '<div class="donut-inner"><div>'+svgHtml+'</div>'+
-    '<div class="donut-legend">'+legHtml+'</div></div></div>';
+    '<div class="donut-legend">'+legHtml+verMasBtn+'</div></div></div>';
 }
 
 /* ══════════════════════════════════════════
@@ -615,14 +622,13 @@ function renderPais(key) {
     '</tr>';
   });
 
-  var vc2 = t && t.varYoY != null ? (t.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)') : '';
   html += '</tbody><tfoot><tr>' +
     '<td>TOTAL ' + p.nombre.toUpperCase() + '</td>' +
     '<td>' + fmt(t && t.real) + '</td>' +
     '<td>' + fmt(t && t.anterior) + '</td>' +
     '<td>' + fmt(t && t.objetivo) + '</td>' +
-    '<td style="' + vc2 + '">' + pctYoY(t && t.varYoY) + '</td>' +
-    '<td>' + badgeHtml(t && t.varObj) + '</td>' +
+    '<td>' + pctYoY(t && t.varYoY) + '</td>' +
+    '<td>' + (t && t.varObj != null ? (t.varObj * 100).toFixed(1) + '%' : '—') + '</td>' +
   '</tr></tfoot></table></div></div>';
 
   el.innerHTML = html;
