@@ -22,7 +22,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--dark);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+body{font-family:'Outfit','Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif;background:var(--cream);color:var(--dark);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-thumb{background:var(--cd);border-radius:9px;}
 
@@ -323,7 +323,7 @@ function buildBarChart(rows, titleTxt) {
   var groups = rows.map(function(r) {
     return '<div class="vbar-group">' +
       '<div class="vbar-sticks">' +
-        '<div class="vbar-col"><div class="vbar b-real" style="width:14px;height:' + barH(r.real)     + 'px" data-tip="Real: '     + fmt(r.real)     + '"></div></div>' +
+        '<div class="vbar-col"><div class="vbar b-real" style="width:14px;height:' + barH(r.real)     + 'px" data-tip="YTD: '     + fmt(r.real)     + '"></div></div>' +
         '<div class="vbar-col"><div class="vbar b-obj"  style="width:14px;height:' + barH(r.objetivo) + 'px" data-tip="Obj: '      + fmt(r.objetivo) + '"></div></div>' +
         '<div class="vbar-col"><div class="vbar b-ant"  style="width:14px;height:' + barH(r.anterior) + 'px" data-tip="Año ant.: ' + fmt(r.anterior) + '"></div></div>' +
       '</div>' +
@@ -335,7 +335,7 @@ function buildBarChart(rows, titleTxt) {
     '<div class="chart-title">' + titleTxt + '</div>' +
     '<div class="vbar-area">' + groups + '</div>' +
     '<div class="chart-legend">' +
-      '<span class="leg-item"><span class="leg-dot" style="background:var(--coral)"></span>Real</span>' +
+      '<span class="leg-item"><span class="leg-dot" style="background:var(--coral)"></span>YTD</span>' +
       '<span class="leg-item"><span class="leg-dot" style="background:#27ae60"></span>Objetivo</span>' +
       '<span class="leg-item"><span class="leg-dot" style="background:var(--cd)"></span>Año anterior</span>' +
     '</div></div>';
@@ -408,7 +408,7 @@ function buildHBarChart(rows, titleTxt) {
     return '<div class="hbar-row">' +
       '<div class="hbar-label">' + r.label + '</div>' +
       '<div class="hbar-sticks">' +
-        '<div class="hbar-group"><div class="hbar b-real" style="width:'+bw(r.real)+'px" data-tip="Real: '+fmt(r.real)+'"></div><span class="hbar-num">'+fmtK(r.real)+'</span></div>' +
+        '<div class="hbar-group"><div class="hbar b-real" style="width:'+bw(r.real)+'px" data-tip="YTD: '+fmt(r.real)+'"></div><span class="hbar-num">'+fmtK(r.real)+'</span></div>' +
         '<div class="hbar-group"><div class="hbar b-obj" style="width:'+bw(r.objetivo)+'px" data-tip="Obj: '+fmt(r.objetivo)+'"></div><span class="hbar-num">'+fmtK(r.objetivo)+'</span></div>' +
         '<div class="hbar-group"><div class="hbar b-ant" style="width:'+bw(r.anterior)+'px" data-tip="Año ant.: '+fmt(r.anterior)+'"></div><span class="hbar-num">'+fmtK(r.anterior)+'</span></div>' +
       '</div>' +
@@ -418,7 +418,7 @@ function buildHBarChart(rows, titleTxt) {
     '<div class="hchart-title">' + titleTxt + '</div>' +
     rowsHtml +
     '<div class="chart-legend" style="margin-top:12px">' +
-      '<span class="leg-item"><span class="leg-dot" style="background:var(--coral)"></span>Real</span>' +
+      '<span class="leg-item"><span class="leg-dot" style="background:var(--coral)"></span>YTD</span>' +
       '<span class="leg-item"><span class="leg-dot" style="background:#27ae60"></span>Objetivo</span>' +
       '<span class="leg-item"><span class="leg-dot" style="background:var(--cd)"></span>Año anterior</span>' +
     '</div></div>';
@@ -446,7 +446,7 @@ function buildDonutHostales(hostales) {
     offset+=dash;
     return{svg:s,p:p,frac:frac,col:col};
   });
-  var svgHtml='<svg width="132" height="132" viewBox="0 0 132 132">'+segs.map(function(s){return s.svg;}).join('')+'<text x="66" y="61" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#7A6E68">Real</text><text x="66" y="79" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
+  var svgHtml='<svg width="132" height="132" viewBox="0 0 132 132">'+segs.map(function(s){return s.svg;}).join('')+'<text x="66" y="61" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="700" fill="#7A6E68">YTD</text><text x="66" y="79" text-anchor="middle" font-family="Outfit,sans-serif" font-size="13" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
   var MAX_V = 6;
   var uid = 'dh' + Math.random().toString(36).substr(2,5);
   var legHtml=segs.map(function(s,i){
@@ -486,7 +486,7 @@ function renderCadena() {
     '<div class="sec-hdr"><h2>Resumen de cadena</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
       '<div class="kpi-box" style="--kc:var(--coral)">' +
-        '<div class="kpi-label">Real YTD</div>' +
+        '<div class="kpi-label">YTD Acumulado</div>' +
         '<div class="kpi-val" style="color:var(--coral)">' + fmt(c.real) + '</div>' +
         '<div class="kpi-sub">USD total cadena</div></div>' +
       '<div class="kpi-box" style="--kc:#27ae60">' +
@@ -518,7 +518,7 @@ function renderCadena() {
         badgeHtml(t.varObj) +
       '</div>' +
       '<div class="pc-cifras">' +
-        '<div><div class="cf-label">Real</div><div class="cf-val coral">' + fmt(t.real) + '</div></div>' +
+        '<div><div class="cf-label">YTD</div><div class="cf-val coral">' + fmt(t.real) + '</div></div>' +
         '<div><div class="cf-label">Objetivo</div><div class="cf-val">' + fmt(t.objetivo) + '</div></div>' +
         '<div><div class="cf-label">Año anterior</div><div class="cf-val">' + fmt(t.anterior) + '</div></div>' +
         '<div><div class="cf-label">vs Año ant.</div><div class="cf-val" style="' + yoyColor + '">' + pctYoY(t.varYoY) + '</div></div>' +
@@ -535,7 +535,7 @@ function renderCadena() {
     .filter(function(p) { return p.total; })
     .map(function(p) { return { label: (p.emoji || '') + ' ' + p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
 
-  html += '<div class="sec"><div class="sec-hdr"><h2>Real vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
+  html += '<div class="sec"><div class="sec-hdr"><h2>YTD vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
     buildBarChart(rows, 'Comparativo por país — YTD') +
   '</div>';
 
@@ -562,7 +562,7 @@ function renderPais(key) {
     '<div class="sec-hdr"><h2>Resumen ' + p.nombre + '</h2><div class="linea"></div></div>' +
     '<div class="kpi-row">' +
       '<div class="kpi-box" style="--kc:var(--coral)">' +
-        '<div class="kpi-label">Real YTD</div>' +
+        '<div class="kpi-label">YTD Acumulado</div>' +
         '<div class="kpi-val" style="color:var(--coral)">' + fmt(t && t.real) + '</div>' +
         '<div class="kpi-sub">USD</div></div>' +
       '<div class="kpi-box" style="--kc:#27ae60">' +
@@ -587,7 +587,7 @@ function renderPais(key) {
 
   /* Donut + barras en dos columnas */
   var donutHtml = buildDonutHostales(p.hostales);
-  var barHtml2  = buildBarChart(bcRows, 'Real vs Objetivo vs Año anterior — YTD');
+  var barHtml2  = buildBarChart(bcRows, 'YTD vs Objetivo vs Año anterior — ' + kpiLabel);
   if (donutHtml) {
     html += '<div class="sec">' +
       '<div class="sec-hdr"><h2>Distribución y comparativo por hostal</h2><div class="linea"></div></div>' +
@@ -603,7 +603,7 @@ function renderPais(key) {
     '<div class="sec-hdr"><h2>Detalle por hostal</h2><div class="linea"></div></div>' +
     '<div class="table-wrap"><table class="detail-table">' +
     '<thead><tr>' +
-      '<th>Hostal</th><th>Real (USD)</th><th>Año ant.</th><th>Objetivo</th><th>vs Año ant.</th><th>vs Objetivo</th>' +
+      '<th>Hostal</th><th>YTD (USD)</th><th>Año ant.</th><th>Objetivo</th><th>vs Año ant.</th><th>vs Objetivo</th>' +
     '</tr></thead><tbody>';
 
   p.hostales.forEach(function(h) {
