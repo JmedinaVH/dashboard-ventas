@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-27T15:50:10.804Z",
+  "updated": "2026-05-27T20:57:25.352Z",
   "paises": {
     "Colombia": {
       "nombre": "Colombia",
@@ -515,9 +515,9 @@
       "total": {
         "real": 0,
         "anterior": 19139,
-        "objetivo": 0,
+        "objetivo": 124611.57,
         "varYoY": -1,
-        "varObj": null
+        "varObj": 0
       },
       "hostales": [
         {
@@ -527,9 +527,9 @@
             "Abr26": {
               "real": 0,
               "anterior": 19139,
-              "objetivo": 0,
+              "objetivo": 124611.57,
               "varYoY": -1,
-              "varObj": null
+              "varObj": 0
             }
           }
         }
@@ -539,8 +539,8 @@
   "cadena": {
     "real": 257004.21,
     "anterior": 183257.83,
-    "objetivo": 339539.9,
+    "objetivo": 464151.47,
     "varYoY": 0.4,
-    "varObj": 0.76
+    "varObj": 0.55
   }
 }
