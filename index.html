@@ -1,383 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Dashboard Ventas · Comercial — Viajero Hostels</title>
 <link rel="icon" type="image/png" href="favicon-32x32.png"/>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* Forzar fuente nativa de emojis — Outfit no los incluye */
-@font-face {
-  font-family: 'Outfit';
-  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Noto Color Emoji');
-  unicode-range: U+1F000-1FFFF, U+2600-27FF, U+FE00-FE0F, U+1F300-1F9FF;
+:root{
+  --coral:#F04B24;--coral-d:#C93A18;--coral-soft:#FEF0EC;--coral-mid:#fdddd6;
+  --cream:#F4EFE9;--cm:#EDE5DA;--cd:#E0D5C8;--border:#DDD4CA;
+  --dark:#1E100A;--mid:#6B3A28;--gris:#7A6E68;
+  --ok:#15803d;--ok-bg:#dcfce7;--ok-light:#86efac;
+  --warn:#854d0e;--warn-bg:#fef9c3;--warn-light:#fde047;
+  --err:#dc2626;--err-bg:#fee2e2;--err-light:#fca5a5;
+  --blue:#0369a1;--blue-bg:#e0f2fe;
+  --surface:#fff;
+  --r:12px;--rl:16px;
+  --sh:0 2px 8px rgba(30,16,10,.06),0 4px 20px rgba(30,16,10,.07);
+  --shm:0 6px 28px rgba(30,16,10,.11);
 }
-</style>
-<style>
-:root {
-  --coral: #F04B24;
-  --coral-d: #C93A18;
-  --coral-soft: #FEF0EC;
-  --coral-mid: #f9c4b6;
-  --cream: #F5F0EA;
-  --cm: #EDE5DA;
-  --cd: #DDD4CA;
-  --border: #E2D8CF;
-  --dark: #1E100A;
-  --mid: #5C2E18;
-  --gris: #8A7E78;
-  --gris-l: #B5ACA6;
-  --ok: #166534;
-  --ok-bg: #dcfce7;
-  --ok-border: #86efac;
-  --warn: #854d0e;
-  --warn-bg: #fef9c3;
-  --warn-border: #fde047;
-  --err: #dc2626;
-  --err-bg: #fee2e2;
-  --err-border: #fca5a5;
-  --blue: #0369a1;
-  --blue-bg: #e0f2fe;
-  --surface: #fff;
-  --r: 12px;
-  --rl: 16px;
-  --sh: 0 1px 3px rgba(30,16,10,.06), 0 4px 16px rgba(30,16,10,.08);
-  --sh-lg: 0 4px 24px rgba(30,16,10,.12);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Outfit', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
-  font-size: 14px;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-thumb { background: var(--cd); border-radius: 9px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--dark);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--cd);border-radius:9px;}
 
-/* ── HEADER ── */
-header {
-  background: var(--dark);
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 64px;
-  position: sticky;
-  top: 0;
-  z-index: 300;
-  box-shadow: 0 2px 16px rgba(0,0,0,.3);
-}
-.h-left { display: flex; align-items: center; gap: 16px; }
-.h-logo { height: 36px; object-fit: contain; }
-.h-sep { width: 1px; height: 32px; background: rgba(255,255,255,.12); }
-.h-title { color: #fff; font-size: 16px; font-weight: 800; letter-spacing: -.2px; }
-.h-sub { color: rgba(255,255,255,.35); font-size: 10px; letter-spacing: .4px; margin-top: 1px; }
-.h-right { display: flex; align-items: center; gap: 12px; }
-.h-ts {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 8px;
-  padding: 5px 12px;
-  display: flex; flex-direction: column; align-items: flex-end; gap: 1px;
-}
-.h-ts-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: rgba(255,255,255,.28); }
-.h-ts-val { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.55); }
-.h-live {
-  display: flex; align-items: center; gap: 6px;
-  background: rgba(16,185,129,.1);
-  border: 1px solid rgba(16,185,129,.22);
-  border-radius: 99px;
-  padding: 5px 13px;
-  font-size: 9px; font-weight: 800; color: #10b981;
-  letter-spacing: .6px; text-transform: uppercase;
-}
-.h-live .dot {
-  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,.5); }
-  50%       { box-shadow: 0 0 0 5px rgba(16,185,129,0); }
-}
-.h-back {
-  display: flex; align-items: center; gap: 6px;
-  color: rgba(255,255,255,.45); font-size: 11px; font-weight: 600;
-  text-decoration: none; border: 1px solid rgba(255,255,255,.1);
-  border-radius: 8px; padding: 5px 12px;
-  transition: all .15s;
-}
-.h-back:hover { color: #fff; border-color: rgba(255,255,255,.25); }
+/* ── HEADER — idéntico al loyalty ── */
+header{background:var(--dark);padding:0 36px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+.h-left{display:flex;align-items:center;gap:14px;}
+.h-logo{height:34px;object-fit:contain;}
+.h-sep{width:1px;height:28px;background:rgba(255,255,255,.15);}
+.h-title{color:#fff;font-size:16px;font-weight:700;}
+.h-sub{color:rgba(255,255,255,.38);font-size:10px;letter-spacing:.4px;margin-top:1px;}
+.h-right{display:flex;align-items:center;gap:10px;}
+.h-ts{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:4px 10px;display:flex;flex-direction:column;align-items:flex-end;gap:1px;}
+.h-ts-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.3);}
+.h-ts-val{font-size:11px;color:rgba(255,255,255,.6);}
+.h-live{display:flex;align-items:center;gap:5px;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:99px;padding:4px 11px;font-size:9px;font-weight:700;color:#10b981;letter-spacing:.5px;text-transform:uppercase;}
+.h-live .dot{width:5px;height:5px;border-radius:50%;background:#10b981;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.5);}50%{box-shadow:0 0 0 4px rgba(16,185,129,0);}}
+.btn-hub{display:flex;align-items:center;gap:5px;color:rgba(255,255,255,.6);font-size:11px;font-weight:600;text-decoration:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:5px 11px;transition:.18s;}
+.btn-hub:hover{background:rgba(255,255,255,.13);color:#fff;}
 
-/* ── CONTROLES ── */
-.controls {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 10px 40px;
-  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-}
-.ctrl-group { display: flex; align-items: center; gap: 8px; }
-.ctrl-group label {
-  font-size: 9px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .8px; color: var(--gris);
-}
-.controls select {
-  font-family: 'Outfit', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
-  border: 1.5px solid var(--border);
-  border-radius: 8px; padding: 6px 14px;
-  font-size: 12px; font-weight: 700;
-  background: var(--cream); color: var(--dark);
-  cursor: pointer; transition: .13s;
-}
-.controls select:focus { outline: none; border-color: var(--coral); }
+/* ── FILTROS — barra coral igual que loyalty ── */
+.filtros{background:var(--coral);padding:9px 36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;position:sticky;top:64px;z-index:199;border-bottom:2px solid var(--coral-d);}
+.fg{display:flex;align-items:center;gap:8px;}
+.fg label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.55);}
+.fg select{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;padding:5px 10px;border:1.5px solid rgba(255,255,255,.22);border-radius:7px;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;transition:.14s;-webkit-appearance:none;appearance:none;}
+.fg select option{background:var(--dark);color:#fff;}
+.fg select:focus{outline:none;background:rgba(255,255,255,.18);}
 
-/* ── TABS ── */
-.tabs-wrap { padding: 20px 40px 0; overflow-x: auto; }
-.tabs { display: flex; gap: 2px; }
-.tab {
-  font-family: 'Outfit', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
-  padding: 9px 20px;
-  border-radius: 10px 10px 0 0;
-  border: 1.5px solid var(--border);
-  border-bottom: none;
-  background: var(--cm);
-  cursor: pointer;
-  font-size: 12px; font-weight: 700;
-  white-space: nowrap; color: var(--gris);
-  transition: background .15s, color .15s;
-}
-.tab:hover { background: var(--cd); color: var(--dark); }
-.tab.active { background: var(--surface); color: var(--dark); }
+/* ── TABS — igual que loyalty: línea inferior, no pestañas ── */
+.tabs-bar{background:var(--surface);border-bottom:2px solid var(--border);padding:0 36px;position:sticky;top:111px;z-index:198;display:flex;overflow-x:auto;}
+.tab-btn{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--gris);background:none;border:none;border-bottom:3px solid transparent;padding:13px 20px;cursor:pointer;transition:.16s;margin-bottom:-2px;white-space:nowrap;}
+.tab-btn:hover{color:var(--dark);}
+.tab-btn.active{color:var(--coral);border-bottom-color:var(--coral);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
 
-/* ── CONTENT ── */
-.content { padding: 0 40px 80px; }
-.panel {
-  display: none;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 0 var(--rl) var(--rl) var(--rl);
-  padding: 28px 32px;
-}
-.panel.active { display: block; }
+/* ── MAIN ── */
+main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 
-/* ── SECTION HEADERS ── */
-.sec { margin-bottom: 28px; }
-.sec-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-.sec-hdr h3 {
-  font-size: 9px; font-weight: 800; color: var(--gris);
-  text-transform: uppercase; letter-spacing: 1.2px; white-space: nowrap;
-}
-.sec-hdr .line { flex: 1; height: 1px; background: var(--border); }
+/* ── SEC ── */
+.sec{margin-bottom:24px;}
+.sec-hdr{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.sec-hdr h2{font-size:11px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+.sec-hdr .linea{flex:1;height:1px;background:var(--border);}
 
 /* ── KPI BOXES ── */
-.kpi-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
-.kpi-box {
-  flex: 1; min-width: 160px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--rl);
-  padding: 20px 24px 18px;
-  background: var(--surface);
-  position: relative; overflow: hidden;
-  box-shadow: var(--sh);
-  transition: box-shadow .18s;
-}
-.kpi-box:hover { box-shadow: var(--sh-lg); }
-.kpi-box::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--kc, var(--coral));
-  border-radius: var(--rl) var(--rl) 0 0;
-}
-.kpi-glow {
-  position: absolute; bottom: -18px; right: -18px;
-  width: 70px; height: 70px; border-radius: 50%;
-  background: var(--kc, var(--coral)); opacity: .05;
-  pointer-events: none;
-}
-.kpi-label {
-  font-size: 9px; font-weight: 800; color: var(--gris);
-  text-transform: uppercase; letter-spacing: .6px; margin-bottom: 8px;
-}
-.kpi-val {
-  font-size: 28px; font-weight: 900; line-height: 1;
-  color: var(--dark); margin-bottom: 4px;
-  font-variant-numeric: tabular-nums;
-}
-.kpi-sub { font-size: 11px; color: var(--gris); font-weight: 600; }
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px;}
+.kpi-box{background:var(--surface);border-radius:var(--r);padding:18px 18px 16px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:box-shadow .18s;}
+.kpi-box:hover{box-shadow:var(--shm);}
+.kpi-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kc,var(--coral));border-radius:var(--r) var(--r) 0 0;}
+.kpi-glow{position:absolute;bottom:-14px;right:-14px;width:54px;height:54px;border-radius:50%;background:var(--kc,var(--coral));opacity:.06;pointer-events:none;}
+.kpi-label{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.kpi-val{font-size:26px;font-weight:800;line-height:1;color:var(--dark);margin-bottom:3px;}
+.kpi-sub{font-size:11px;color:var(--gris);line-height:1.4;}
 
 /* ── BADGE ── */
-.badge {
-  display: inline-flex; align-items: center;
-  padding: 2px 9px; border-radius: 99px;
-  font-size: 10px; font-weight: 800;
-}
-.badge.green  { background: var(--ok-bg);   color: var(--ok);   border: 1px solid var(--ok-border); }
-.badge.yellow { background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn-border); }
-.badge.red    { background: var(--err-bg);  color: var(--err);  border: 1px solid var(--err-border); }
-.badge.blue   { background: var(--blue-bg); color: var(--blue); border: 1px solid #7dd3fc; }
+.badge{display:inline-flex;align-items:center;font-size:9px;font-weight:700;padding:2px 8px;border-radius:99px;}
+.b-ok{background:var(--ok-bg);color:var(--ok);}
+.b-warn{background:var(--warn-bg);color:var(--warn);}
+.b-err{background:var(--err-bg);color:var(--err);}
+.b-blue{background:var(--blue-bg);color:var(--blue);}
 
-/* ── SEMÁFORO GRID ── */
-.semaforo-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 14px; margin-bottom: 28px;
-}
-.pais-card {
-  border: 1.5px solid var(--border);
-  border-radius: var(--rl); padding: 20px 22px;
-  background: var(--surface);
-  position: relative; overflow: hidden;
-  transition: box-shadow .18s, transform .18s;
-  box-shadow: var(--sh);
-}
-.pais-card:hover { box-shadow: var(--sh-lg); transform: translateY(-1px); }
-.pais-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--pc, var(--gris));
-  border-radius: var(--rl) var(--rl) 0 0;
-}
-.pais-card .pc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.pais-card .nombre { font-weight: 800; font-size: 14px; }
-.pais-card .cifras {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 6px 14px; font-size: 11px; color: var(--gris);
-  margin-bottom: 14px;
-}
-.pais-card .cifras .cf-item { }
-.pais-card .cifras .cf-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--gris-l); margin-bottom: 1px; }
-.pais-card .cifras .cf-val { font-size: 14px; font-weight: 800; color: var(--dark); }
-.pais-card .cifras .cf-val.coral { color: var(--coral-d); }
-.pais-card .cifras .cf-val.green { color: var(--ok); }
-.bar-track {
-  height: 8px; border-radius: 99px;
-  background: var(--cm); overflow: hidden;
-}
-.bar-fill {
-  height: 100%; border-radius: 99px;
-  transition: width .7s cubic-bezier(.4,0,.2,1);
-}
-.bar-meta { display: flex; justify-content: space-between; font-size: 10px; font-weight: 600; margin-top: 5px; color: var(--gris); }
+/* ── SEMÁFORO GRID — tarjetas de país ── */
+.semaforo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:20px;}
+.pais-card{background:var(--surface);border-radius:var(--rl);padding:18px 20px;border:1.5px solid var(--border);position:relative;overflow:hidden;transition:box-shadow .18s;}
+.pais-card:hover{box-shadow:var(--shm);}
+.pais-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pc,var(--gris));border-radius:var(--rl) var(--rl) 0 0;}
+.pc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.pc-nombre{font-weight:800;font-size:14px;}
+.pc-cifras{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-bottom:14px;}
+.cf-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#B5ACA6;margin-bottom:1px;}
+.cf-val{font-size:15px;font-weight:800;color:var(--dark);}
+.cf-val.coral{color:var(--coral-d);}
+.cf-val.green{color:var(--ok);}
+.cf-val.red{color:var(--err);}
+.bar-track{height:7px;border-radius:99px;background:var(--cd);overflow:hidden;}
+.bar-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.bar-meta{display:flex;justify-content:space-between;font-size:10px;font-weight:600;margin-top:4px;color:var(--gris);}
 
 /* ── BAR CHART ── */
-.chart-wrap {
-  background: var(--cream);
-  border-radius: var(--rl);
-  padding: 22px 24px;
-  border: 1.5px solid var(--border);
-}
-.chart-title {
-  font-size: 9px; font-weight: 800; color: var(--gris);
-  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
-}
-.bar-chart { display: flex; flex-direction: column; gap: 18px; }
-.bar-row { display: flex; align-items: flex-start; gap: 12px; }
-.bar-row-label {
-  width: 140px; flex-shrink: 0;
-  font-size: 12px; font-weight: 700; color: var(--dark);
-  text-align: right; padding-top: 4px;
-  line-height: 1.3;
-}
-.bar-row-bars { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; overflow: hidden; }
-.bar-group { display: flex; align-items: center; gap: 8px; min-width: 0; width: 100%; }
-.bar-group-bar {
-  height: 11px; border-radius: 99px; min-width: 3px;
-  flex-shrink: 0;
-  /* Cap: never wider than 60% of the row so label always fits */
-  max-width: 60%;
-  transition: width .7s cubic-bezier(.4,0,.2,1);
-  position: relative; cursor: default;
-}
-.bar-group-bar.b-real    { background: var(--coral); }
-.bar-group-bar.b-obj     { background: #27ae60; }
-.bar-group-bar.b-ant     { background: var(--cd); }
-.bar-group-lbl { font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--dark); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; max-width: 38%; }
-.bar-group-lbl.l-real { color: var(--coral-d); }
-.bar-group-lbl.l-obj  { color: #166534; }
-.bar-group-lbl.l-ant  { color: var(--gris); }
+.chart-wrap{background:var(--surface);border-radius:var(--rl);border:1.5px solid var(--border);padding:20px 22px;}
+.chart-title{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;}
+.bar-chart{display:flex;flex-direction:column;gap:16px;}
 
-.chart-legend { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; color: var(--gris); }
-.legend-dot { width: 12px; height: 8px; border-radius: 3px; flex-shrink: 0; }
+/* cada país/hostal */
+.bc-row{display:flex;align-items:flex-start;gap:12px;}
+.bc-label{width:150px;flex-shrink:0;font-size:11px;font-weight:700;color:var(--dark);text-align:right;padding-top:3px;line-height:1.3;}
+.bc-bars{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
+.bc-group{display:flex;align-items:center;gap:8px;min-width:0;}
+/* la barra en sí: máx 65% del contenedor para que el label nunca se salga */
+.bc-bar{height:10px;border-radius:99px;min-width:3px;max-width:65%;flex-shrink:0;cursor:default;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.bc-bar.b-real{background:var(--coral);}
+.bc-bar.b-obj {background:#27ae60;}
+.bc-bar.b-ant {background:var(--cd);}
+.bc-lbl{font-size:11px;font-weight:700;white-space:nowrap;flex-shrink:0;}
+.bc-lbl.l-real{color:var(--coral-d);}
+.bc-lbl.l-obj {color:#166534;}
+.bc-lbl.l-ant {color:var(--gris);}
+
+.chart-legend{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--gris);}
+.leg-dot{width:12px;height:8px;border-radius:3px;flex-shrink:0;}
 
 /* ── DETAIL TABLE ── */
-.table-wrap { overflow-x: auto; margin-top: 28px; border-radius: var(--r); box-shadow: var(--sh); }
-.detail-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.detail-table thead th {
-  background: var(--dark); color: #fff;
-  padding: 11px 16px;
-  text-align: right;
-  font-weight: 800; font-size: 9px;
-  text-transform: uppercase; letter-spacing: .6px;
-  white-space: nowrap;
-}
-.detail-table thead th:first-child { text-align: left; border-radius: 8px 0 0 0; }
-.detail-table thead th:last-child { border-radius: 0 8px 0 0; }
-.detail-table tbody td {
-  padding: 13px 16px;
-  text-align: right;
-  border-bottom: 1px solid var(--border);
-  font-variant-numeric: tabular-nums;
-}
-.detail-table tbody td:first-child { text-align: left; }
-.detail-table tbody tr:last-child td { border-bottom: none; }
-.detail-table tbody tr:hover td { background: var(--cream); }
-.detail-table tfoot td {
-  padding: 13px 16px;
-  text-align: right;
-  background: var(--ok-bg);
-  font-weight: 800; font-size: 13px;
-  border-top: 2px solid var(--ok-border);
-  font-variant-numeric: tabular-nums;
-}
-.detail-table tfoot td:first-child { text-align: left; border-radius: 0 0 0 8px; }
-.detail-table tfoot td:last-child { border-radius: 0 0 8px 0; }
+.table-wrap{overflow-x:auto;border-radius:var(--r);border:1.5px solid var(--border);}
+.detail-table{width:100%;border-collapse:collapse;font-size:12px;}
+.detail-table thead th{background:var(--cm);color:var(--mid);padding:9px 13px;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:.6px;border-bottom:1.5px solid var(--border);text-align:right;white-space:nowrap;}
+.detail-table thead th:first-child{text-align:left;}
+.detail-table tbody td{padding:10px 13px;border-bottom:1px solid var(--border);text-align:right;}
+.detail-table tbody td:first-child{text-align:left;}
+.detail-table tbody tr:last-child td{border-bottom:none;}
+.detail-table tbody tr:hover td{background:var(--cream);}
+.detail-table tfoot td{padding:11px 13px;text-align:right;background:var(--ok-bg);font-weight:800;font-size:12px;border-top:2px solid var(--ok-light);}
+.detail-table tfoot td:first-child{text-align:left;}
+.chip{background:var(--coral-soft);color:var(--coral-d);border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;display:inline-block;white-space:nowrap;}
 
-.chip {
-  background: var(--coral-soft); color: var(--coral-d);
-  border-radius: 99px; padding: 3px 12px;
-  font-size: 11px; font-weight: 800;
-  display: inline-block; white-space: nowrap;
-}
+/* ── TOOLTIP JS ── */
+#vt{position:fixed;background:var(--dark);color:#fff;font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;padding:5px 11px;border-radius:8px;pointer-events:none;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.35);z-index:9999;opacity:0;transition:opacity .12s;transform:translateX(-50%);}
+#vt.show{opacity:1;}
 
-/* ── TOOLTIP (JS) ── */
-#tooltip {
-  position: fixed;
-  background: var(--dark); color: #fff;
-  font-family: 'Outfit', sans-serif;
-  font-size: 11px; font-weight: 700;
-  padding: 6px 12px; border-radius: 8px;
-  pointer-events: none; white-space: nowrap;
-  box-shadow: 0 4px 16px rgba(0,0,0,.3);
-  z-index: 9999; opacity: 0;
-  transition: opacity .12s;
-}
-#tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%; left: 50%; transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: var(--dark);
-}
-#tooltip.show { opacity: 1; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 720px) {
-  header, .controls, .tabs-wrap, .content { padding-left: 16px; padding-right: 16px; }
-  .panel { padding: 18px 16px; }
-  .bar-row-label { width: 80px; font-size: 10px; }
-  .h-right { display: none; }
-  .kpi-box { min-width: 130px; }
+@media(max-width:720px){
+  header,.filtros,.tabs-bar,main{padding-left:14px;padding-right:14px;}
+  .bc-label{width:80px;font-size:10px;}
+  .h-right{display:none;}
 }
 </style>
 </head>
 <body>
 
-<!-- TOOLTIP GLOBAL -->
-<div id="tooltip"></div>
+<!-- TOOLTIP -->
+<div id="vt"></div>
 
 <!-- HEADER -->
 <header>
@@ -386,137 +162,73 @@ header {
       onerror="this.style.display='none';document.getElementById('logo-fb').style.display='block'"/>
     <span id="logo-fb" style="display:none;font-size:14px;font-weight:900;color:#fff;letter-spacing:.5px;">VIAJERO</span>
     <div class="h-sep"></div>
-    <div>
-      <div class="h-title">Dashboard Ventas Comercial</div>
-      <div class="h-sub">Agencias &amp; Grupos · Viajero Hostels</div>
-    </div>
+    <div><div class="h-title">Dashboard Ventas Comercial</div><div class="h-sub">Agencias &amp; Grupos · Viajero Hostels</div></div>
   </div>
   <div class="h-right">
-    <a class="h-back" href="https://jmedinavh.github.io/viajero-dashboard/index.html">← Hub</a>
-    <div class="h-ts">
-      <div class="h-ts-label">Actualizado</div>
-      <div class="h-ts-val" id="updated">—</div>
-    </div>
+    <a class="btn-hub" href="https://jmedinavh.github.io/viajero-dashboard/index.html">&#8592; Hub</a>
+    <div class="h-ts"><div class="h-ts-label">Actualizado</div><div class="h-ts-val" id="h-updated">—</div></div>
     <div class="h-live"><div class="dot"></div>Live</div>
   </div>
 </header>
 
-<!-- CONTROLES -->
-<div class="controls">
-  <div class="ctrl-group">
-    <label>Mes</label>
-    <select id="mesSel"></select>
-  </div>
+<!-- FILTROS (barra coral) -->
+<div class="filtros">
+  <div class="fg"><label>Mes</label><select id="mesSel"><option value="">Todos</option></select></div>
 </div>
 
-<!-- TABS + CONTENT -->
-<div class="tabs-wrap"><div class="tabs" id="tabs"></div></div>
-<div class="content" id="content"></div>
+<!-- TABS BAR -->
+<div class="tabs-bar" id="tabs-bar"></div>
+
+<!-- MAIN -->
+<main id="main-content"></main>
 
 <script>
-/* ───────────────── CONFIG ───────────────── */
-const DATA_URL = 'https://raw.githubusercontent.com/jmedinavh/dashboard-ventas/main/data/data.json';
-
-let DATA = null;
-let mesSel = null;
-
-/* ───────────────── TOOLTIP ───────────────── */
-const tip = document.getElementById('tooltip');
-function showTip(e, text) {
-  tip.textContent = text;
-  tip.classList.add('show');
-  moveTip(e);
+/* ══════════════════════════════════════════
+   TOOLTIP
+══════════════════════════════════════════ */
+var vt = document.getElementById('vt');
+function tipShow(e, txt) {
+  vt.textContent = txt;
+  vt.classList.add('show');
+  tipMove(e);
 }
-function moveTip(e) {
-  const x = e.clientX, y = e.clientY;
-  tip.style.left = (x - tip.offsetWidth / 2) + 'px';
-  tip.style.top  = (y - tip.offsetHeight - 14) + 'px';
+function tipMove(e) {
+  vt.style.left = e.clientX + 'px';
+  vt.style.top  = (e.clientY - vt.offsetHeight - 12) + 'px';
 }
-function hideTip() { tip.classList.remove('show'); }
-
-/* ───────────────── INIT ───────────────── */
-async function init() {
-  try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
-    DATA = await res.json();
-  } catch(e) {
-    document.getElementById('content').innerHTML =
-      '<div style="padding:40px;color:var(--err);font-weight:700;">⚠ Error cargando datos. Verifica la URL del JSON.</div>';
-    return;
-  }
-
-  /* Meses disponibles */
-  const mesesSet = new Set();
-  Object.values(DATA.paises).forEach(p =>
-    (p.meses || []).forEach(m => mesesSet.add(m))
-  );
-  const meses = [...mesesSet];
-  mesSel = meses[meses.length - 1];
-
-  const sel = document.getElementById('mesSel');
-  meses.forEach(m => {
-    const o = document.createElement('option');
-    o.value = m; o.textContent = m;
-    sel.appendChild(o);
-  });
-  sel.value = mesSel;
-  sel.addEventListener('change', e => { mesSel = e.target.value; renderAll(); });
-
-  document.getElementById('updated').textContent =
-    new Date(DATA.updated).toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' });
-
-  buildTabs();
-  renderAll();
-}
-
-/* ───────────────── TABS ───────────────── */
-function buildTabs() {
-  const tabsEl  = document.getElementById('tabs');
-  const contEl  = document.getElementById('content');
-
-  addTab(tabsEl, contEl, 'cadena', '🌎 Cadena');
-  Object.keys(DATA.paises).forEach(key => {
-    const p = DATA.paises[key];
-    addTab(tabsEl, contEl, key, `${p.emoji} ${p.nombre}`);
-  });
-
-  tabsEl.querySelector('.tab').classList.add('active');
-  contEl.querySelector('.panel').classList.add('active');
-
-  tabsEl.querySelectorAll('.tab').forEach(t => {
-    t.addEventListener('click', () => {
-      tabsEl.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-      contEl.querySelectorAll('.panel').forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      document.getElementById('panel-' + t.dataset.tab).classList.add('active');
-    });
+function tipHide() { vt.classList.remove('show'); }
+function bindTips(root) {
+  root.querySelectorAll('[data-tip]').forEach(function(bar) {
+    bar.addEventListener('mouseenter', function(e) { tipShow(e, bar.dataset.tip); });
+    bar.addEventListener('mousemove',  function(e) { tipMove(e); });
+    bar.addEventListener('mouseleave', tipHide);
   });
 }
 
-function addTab(tabsEl, contEl, key, label) {
-  const t = document.createElement('div');
-  t.className = 'tab'; t.dataset.tab = key; t.textContent = label;
-  tabsEl.appendChild(t);
-  const p = document.createElement('div');
-  p.className = 'panel'; p.id = 'panel-' + key;
-  contEl.appendChild(p);
-}
+/* ══════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════ */
+var DATA_URL = 'https://raw.githubusercontent.com/jmedinavh/dashboard-ventas/main/data/data.json';
+var DATA = null;
+var mesSel = '';
 
-/* ───────────────── HELPERS ───────────────── */
+/* ══════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════ */
 function fmt(n) {
   if (n == null) return '—';
-  return '$' + Number(n).toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  return '$' + Number(n).toLocaleString('es-CO', {minimumFractionDigits:0, maximumFractionDigits:0});
 }
 function pct(n) {
   if (n == null) return '—';
   return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%';
 }
 function badgeHtml(v) {
-  if (v == null) return '<span class="badge blue">Nuevo</span>';
-  const p = (v * 100).toFixed(0) + '%';
-  if (v >= 0.9) return `<span class="badge green">${p}</span>`;
-  if (v >= 0.5) return `<span class="badge yellow">${p}</span>`;
-  return `<span class="badge red">${p}</span>`;
+  if (v == null) return '<span class="badge b-blue">Nuevo</span>';
+  var p = (v * 100).toFixed(0) + '%';
+  if (v >= 0.9) return '<span class="badge b-ok">'  + p + '</span>';
+  if (v >= 0.5) return '<span class="badge b-warn">' + p + '</span>';
+  return '<span class="badge b-err">' + p + '</span>';
 }
 function colorFor(v) {
   if (v == null) return '#2980b9';
@@ -524,265 +236,295 @@ function colorFor(v) {
   if (v >= 0.5)  return '#f1c40f';
   return '#e74c3c';
 }
-function getMes(hostalMeses) {
-  if (!hostalMeses) return null;
-  if (hostalMeses[mesSel]) return hostalMeses[mesSel];
-  const keys = Object.keys(hostalMeses);
-  return hostalMeses[keys[keys.length - 1]];
+function getMes(mesesObj) {
+  if (!mesesObj) return null;
+  if (mesSel && mesesObj[mesSel]) return mesesObj[mesSel];
+  var keys = Object.keys(mesesObj);
+  return keys.length ? mesesObj[keys[keys.length - 1]] : null;
 }
 
-/* ───────────────── BAR CHART HTML ───────────────── */
-function buildBarChart(rows, titleText) {
-  /* rows: [{label, real, objetivo, anterior}] */
-  const maxVal = Math.max(
-    ...rows.flatMap(r => [r.real || 0, r.objetivo || 0, r.anterior || 0]),
-    1
-  );
-  const w = v => Math.min(Math.max(Math.round((v / maxVal) * 100), 1), 100);
-
-  let html = `<div class="chart-wrap">
-    <div class="chart-title">${titleText}</div>
-    <div class="bar-chart">`;
-
-  rows.forEach(r => {
-    html += `<div class="bar-row">
-      <div class="bar-row-label">${r.label}</div>
-      <div class="bar-row-bars">
-        <div class="bar-group">
-          <div class="bar-group-bar b-real" style="width:${w(r.real)}%"
-            data-tip="Real: ${fmt(r.real)}"></div>
-          <span class="bar-group-lbl l-real">${fmt(r.real)}</span>
-        </div>
-        <div class="bar-group">
-          <div class="bar-group-bar b-obj" style="width:${w(r.objetivo)}%"
-            data-tip="Objetivo: ${fmt(r.objetivo)}"></div>
-          <span class="bar-group-lbl l-obj">${fmt(r.objetivo)}</span>
-        </div>
-        <div class="bar-group">
-          <div class="bar-group-bar b-ant" style="width:${w(r.anterior)}%"
-            data-tip="Año ant.: ${fmt(r.anterior)}"></div>
-          <span class="bar-group-lbl l-ant">${fmt(r.anterior)}</span>
-        </div>
-      </div>
-    </div>`;
+/* ══════════════════════════════════════════
+   BAR CHART — contiene las barras dentro del flex
+══════════════════════════════════════════ */
+function buildBarChart(rows, titleTxt) {
+  // rows: [{label, real, objetivo, anterior}]
+  var maxVal = 1;
+  rows.forEach(function(r) {
+    if ((r.real     || 0) > maxVal) maxVal = r.real;
+    if ((r.objetivo || 0) > maxVal) maxVal = r.objetivo;
+    if ((r.anterior || 0) > maxVal) maxVal = r.anterior;
   });
+  // barW: porcentaje relativo al máximo, clampeado 1-100
+  // la barra tiene max-width:65% en CSS, así que nunca se desborda
+  function barW(v) { return Math.min(Math.max(Math.round(((v || 0) / maxVal) * 100), 1), 100); }
 
-  html += `</div>
-    <div class="chart-legend">
-      <span class="legend-item"><span class="legend-dot" style="background:var(--coral)"></span>Real</span>
-      <span class="legend-item"><span class="legend-dot" style="background:#27ae60"></span>Objetivo</span>
-      <span class="legend-item"><span class="legend-dot" style="background:var(--cd)"></span>Año anterior</span>
-    </div>
-  </div>`;
-  return html;
+  var rowsHtml = rows.map(function(r) {
+    return '<div class="bc-row">' +
+      '<div class="bc-label">' + r.label + '</div>' +
+      '<div class="bc-bars">' +
+        '<div class="bc-group">' +
+          '<div class="bc-bar b-real" style="width:' + barW(r.real) + '%"' +
+               ' data-tip="Real: ' + fmt(r.real) + '"></div>' +
+          '<span class="bc-lbl l-real">' + fmt(r.real) + '</span>' +
+        '</div>' +
+        '<div class="bc-group">' +
+          '<div class="bc-bar b-obj" style="width:' + barW(r.objetivo) + '%"' +
+               ' data-tip="Objetivo: ' + fmt(r.objetivo) + '"></div>' +
+          '<span class="bc-lbl l-obj">' + fmt(r.objetivo) + '</span>' +
+        '</div>' +
+        '<div class="bc-group">' +
+          '<div class="bc-bar b-ant" style="width:' + barW(r.anterior) + '%"' +
+               ' data-tip="Año ant.: ' + fmt(r.anterior) + '"></div>' +
+          '<span class="bc-lbl l-ant">' + fmt(r.anterior) + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  return '<div class="chart-wrap">' +
+    '<div class="chart-title">' + titleTxt + '</div>' +
+    '<div class="bar-chart">' + rowsHtml + '</div>' +
+    '<div class="chart-legend">' +
+      '<span class="leg-item"><span class="leg-dot" style="background:var(--coral)"></span>Real</span>' +
+      '<span class="leg-item"><span class="leg-dot" style="background:#27ae60"></span>Objetivo</span>' +
+      '<span class="leg-item"><span class="leg-dot" style="background:var(--cd)"></span>Año anterior</span>' +
+    '</div>' +
+  '</div>';
 }
 
-/* ───────────────── RENDER CADENA ───────────────── */
+/* ══════════════════════════════════════════
+   RENDER CADENA
+══════════════════════════════════════════ */
 function renderCadena() {
-  const el = document.getElementById('panel-cadena');
-  const c  = DATA.cadena;
+  var el = document.getElementById('panel-cadena');
+  if (!el) return;
+  var c = DATA.cadena;
+
+  var kpiLabel = mesSel || 'Período';
+
+  var html = '';
 
   /* KPIs */
-  let html = `
-  <div class="sec">
-    <div class="sec-hdr"><h3>Resumen de cadena</h3><div class="line"></div></div>
-    <div class="kpi-row">
-      <div class="kpi-box" style="--kc:var(--coral)">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">Real ${mesSel}</div>
-        <div class="kpi-val">${fmt(c.real)}</div>
-        <div class="kpi-sub">USD total cadena</div>
-      </div>
-      <div class="kpi-box" style="--kc:#27ae60">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">Objetivo</div>
-        <div class="kpi-val">${fmt(c.objetivo)}</div>
-        <div class="kpi-sub">${badgeHtml(c.varObj)} cumplimiento</div>
-      </div>
-      <div class="kpi-box" style="--kc:var(--blue)">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">Año anterior</div>
-        <div class="kpi-val">${fmt(c.anterior)}</div>
-        <div class="kpi-sub">YoY ${pct(c.varYoY)}</div>
-      </div>
-    </div>
-  </div>`;
+  html += '<div class="sec">' +
+    '<div class="sec-hdr"><h2>Resumen de cadena</h2><div class="linea"></div></div>' +
+    '<div class="kpi-row">' +
+      '<div class="kpi-box" style="--kc:var(--coral)"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
+        '<div class="kpi-val">' + fmt(c.real) + '</div>' +
+        '<div class="kpi-sub">USD total cadena</div></div>' +
+      '<div class="kpi-box" style="--kc:#27ae60"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">Objetivo</div>' +
+        '<div class="kpi-val">' + fmt(c.objetivo) + '</div>' +
+        '<div class="kpi-sub">' + badgeHtml(c.varObj) + ' cumplimiento</div></div>' +
+      '<div class="kpi-box" style="--kc:var(--blue)"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">Año anterior</div>' +
+        '<div class="kpi-val">' + fmt(c.anterior) + '</div>' +
+        '<div class="kpi-sub">YoY ' + pct(c.varYoY) + '</div></div>' +
+    '</div></div>';
 
   /* Semáforo países */
-  html += `<div class="sec">
-    <div class="sec-hdr"><h3>Estado por país</h3><div class="line"></div></div>
-    <div class="semaforo-grid">`;
+  html += '<div class="sec"><div class="sec-hdr"><h2>Estado por país</h2><div class="linea"></div></div>' +
+    '<div class="semaforo-grid">';
 
-  Object.entries(DATA.paises).forEach(([key, p]) => {
-    const t = p.total;
-    if (!t) return;
-    const fillPct = t.varObj != null ? Math.min(t.varObj * 100, 100) : 0;
-    html += `
-    <div class="pais-card" style="--pc:${colorFor(t.varObj)}">
-      <div class="pc-header">
-        <div class="nombre">${p.emoji} ${p.nombre}</div>
-        ${badgeHtml(t.varObj)}
-      </div>
-      <div class="cifras">
-        <div class="cf-item">
-          <div class="cf-label">Real</div>
-          <div class="cf-val coral">${fmt(t.real)}</div>
-        </div>
-        <div class="cf-item">
-          <div class="cf-label">Objetivo</div>
-          <div class="cf-val">${fmt(t.objetivo)}</div>
-        </div>
-        <div class="cf-item">
-          <div class="cf-label">Año anterior</div>
-          <div class="cf-val">${fmt(t.anterior)}</div>
-        </div>
-        <div class="cf-item">
-          <div class="cf-label">YoY</div>
-          <div class="cf-val ${t.varYoY >= 0 ? 'green' : ''}" style="${t.varYoY < 0 ? 'color:var(--err)' : ''}">${pct(t.varYoY)}</div>
-        </div>
-      </div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${fillPct}%;background:${colorFor(t.varObj)}"></div>
-      </div>
-      <div class="bar-meta">
-        <span>${t.varObj != null ? (t.varObj * 100).toFixed(1) + '% del objetivo' : 'Sin base anterior'}</span>
-      </div>
-    </div>`;
+  Object.entries(DATA.paises).forEach(function(entry) {
+    var key = entry[0], p = entry[1];
+    var t = p.total; if (!t) return;
+    var fill = t.varObj != null ? Math.min(t.varObj * 100, 100) : 0;
+    var yoyColor = t.varYoY == null ? 'color:var(--gris)' : t.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)';
+    html += '<div class="pais-card" style="--pc:' + colorFor(t.varObj) + '">' +
+      '<div class="pc-header">' +
+        '<div class="pc-nombre">' + (p.emoji || '') + ' ' + p.nombre + '</div>' +
+        badgeHtml(t.varObj) +
+      '</div>' +
+      '<div class="pc-cifras">' +
+        '<div><div class="cf-label">Real</div><div class="cf-val coral">' + fmt(t.real) + '</div></div>' +
+        '<div><div class="cf-label">Objetivo</div><div class="cf-val">' + fmt(t.objetivo) + '</div></div>' +
+        '<div><div class="cf-label">Año anterior</div><div class="cf-val">' + fmt(t.anterior) + '</div></div>' +
+        '<div><div class="cf-label">YoY</div><div class="cf-val" style="' + yoyColor + '">' + pct(t.varYoY) + '</div></div>' +
+      '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + fill + '%;background:' + colorFor(t.varObj) + '"></div></div>' +
+      '<div class="bar-meta"><span>' + (t.varObj != null ? (t.varObj * 100).toFixed(1) + '% del objetivo' : 'Sin base anterior') + '</span></div>' +
+    '</div>';
   });
 
-  html += `</div></div>`;
+  html += '</div></div>';
 
-  /* Gráfico barras cadena */
-  const rows = Object.entries(DATA.paises)
-    .filter(([,p]) => p.total)
-    .map(([,p]) => ({
-      label:    p.emoji + ' ' + p.nombre,
-      real:     p.total.real,
-      objetivo: p.total.objetivo,
-      anterior: p.total.anterior,
-    }));
+  /* Gráfico cadena */
+  var rows = Object.values(DATA.paises)
+    .filter(function(p) { return p.total; })
+    .map(function(p) { return { label: (p.emoji || '') + ' ' + p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
 
-  html += `<div class="sec">
-    <div class="sec-hdr"><h3>Real vs Objetivo vs Año anterior (${mesSel})</h3><div class="line"></div></div>
-    ${buildBarChart(rows, 'Comparativo por país — ' + mesSel)}
-  </div>`;
+  html += '<div class="sec"><div class="sec-hdr"><h2>Real vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
+    buildBarChart(rows, 'Comparativo por país — ' + kpiLabel) +
+  '</div>';
 
   el.innerHTML = html;
-  bindBarTooltips(el);
+  bindTips(el);
 }
 
-/* ───────────────── RENDER PAÍS ───────────────── */
+/* ══════════════════════════════════════════
+   RENDER PAÍS
+══════════════════════════════════════════ */
 function renderPais(key) {
-  const el = document.getElementById('panel-' + key);
+  var el = document.getElementById('panel-' + key);
   if (!el) return;
-  const p = DATA.paises[key];
-  if (!p || !p.hostales) { el.innerHTML = '<p style="color:var(--gris);padding:20px;">Sin datos para este período.</p>'; return; }
+  var p = DATA.paises[key];
+  if (!p || !p.hostales) { el.innerHTML = '<p style="color:var(--gris);padding:20px;">Sin datos.</p>'; return; }
+  var t = p.total;
+  var kpiLabel = mesSel || 'Período';
 
-  const t = p.total;
+  var html = '';
 
   /* KPIs país */
-  let html = `<div class="sec">
-    <div class="sec-hdr"><h3>Resumen ${p.nombre}</h3><div class="line"></div></div>
-    <div class="kpi-row">
-      <div class="kpi-box" style="--kc:var(--coral)">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">Real ${mesSel}</div>
-        <div class="kpi-val">${fmt(t?.real)}</div>
-        <div class="kpi-sub">USD</div>
-      </div>
-      <div class="kpi-box" style="--kc:#27ae60">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">Objetivo</div>
-        <div class="kpi-val">${fmt(t?.objetivo)}</div>
-        <div class="kpi-sub">${badgeHtml(t?.varObj)} cumplimiento</div>
-      </div>
-      <div class="kpi-box" style="--kc:var(--blue)">
-        <div class="kpi-glow"></div>
-        <div class="kpi-label">YoY</div>
-        <div class="kpi-val" style="color:${t?.varYoY >= 0 ? 'var(--ok)' : 'var(--err)'}">${pct(t?.varYoY)}</div>
-        <div class="kpi-sub">vs año anterior</div>
-      </div>
-    </div>
-  </div>`;
+  var yoyColor = t && t.varYoY != null ? (t.varYoY >= 0 ? 'var(--ok)' : 'var(--err)') : 'var(--dark)';
+  html += '<div class="sec">' +
+    '<div class="sec-hdr"><h2>Resumen ' + p.nombre + '</h2><div class="linea"></div></div>' +
+    '<div class="kpi-row">' +
+      '<div class="kpi-box" style="--kc:var(--coral)"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">Real ' + kpiLabel + '</div>' +
+        '<div class="kpi-val">' + fmt(t && t.real) + '</div>' +
+        '<div class="kpi-sub">USD</div></div>' +
+      '<div class="kpi-box" style="--kc:#27ae60"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">Objetivo</div>' +
+        '<div class="kpi-val">' + fmt(t && t.objetivo) + '</div>' +
+        '<div class="kpi-sub">' + badgeHtml(t && t.varObj) + ' cumplimiento</div></div>' +
+      '<div class="kpi-box" style="--kc:var(--blue)"><div class="kpi-glow"></div>' +
+        '<div class="kpi-label">YoY</div>' +
+        '<div class="kpi-val" style="color:' + yoyColor + '">' + pct(t && t.varYoY) + '</div>' +
+        '<div class="kpi-sub">vs año anterior</div></div>' +
+    '</div></div>';
 
-  /* Gráfico barras por hostal */
-  const rows = p.hostales.map(h => {
-    const m = getMes(h.meses);
-    return { label: h.nombre_completo, real: m?.real || 0, objetivo: m?.objetivo || 0, anterior: m?.anterior || 0 };
+  /* Gráfico por hostal */
+  var bcRows = p.hostales.map(function(h) {
+    var m = getMes(h.meses);
+    return { label: h.nombre_completo, real: m ? m.real : 0, objetivo: m ? m.objetivo : 0, anterior: m ? m.anterior : 0 };
   });
-
-  html += `<div class="sec">
-    <div class="sec-hdr"><h3>Comparativo por hostal — ${mesSel}</h3><div class="line"></div></div>
-    ${buildBarChart(rows, 'Real vs Objetivo vs Año anterior')}
-  </div>`;
+  html += '<div class="sec">' +
+    '<div class="sec-hdr"><h2>Comparativo por hostal</h2><div class="linea"></div></div>' +
+    buildBarChart(bcRows, 'Real vs Objetivo vs Año anterior — ' + kpiLabel) +
+  '</div>';
 
   /* Tabla detalle */
-  html += `<div class="sec">
-    <div class="sec-hdr"><h3>Detalle por hostal</h3><div class="line"></div></div>
-    <div class="table-wrap">
-    <table class="detail-table">
-    <thead><tr>
-      <th>Hostal</th>
-      <th>Real (USD)</th>
-      <th>Año ant.</th>
-      <th>Objetivo</th>
-      <th>Var YoY</th>
-      <th>Cumplimiento</th>
-    </tr></thead>
-    <tbody>`;
+  html += '<div class="sec">' +
+    '<div class="sec-hdr"><h2>Detalle por hostal</h2><div class="linea"></div></div>' +
+    '<div class="table-wrap"><table class="detail-table">' +
+    '<thead><tr>' +
+      '<th>Hostal</th><th>Real (USD)</th><th>Año ant.</th><th>Objetivo</th><th>Var YoY</th><th>Cumplimiento</th>' +
+    '</tr></thead><tbody>';
 
-  p.hostales.forEach(h => {
-    const m = getMes(h.meses);
-    if (!m) return;
-    const fillPct = m.varObj != null ? Math.min(m.varObj * 100, 100) : 0;
-    html += `<tr>
-      <td><span class="chip">${h.nombre_completo}</span></td>
-      <td>${fmt(m.real)}</td>
-      <td>${fmt(m.anterior)}</td>
-      <td>${fmt(m.objetivo)}</td>
-      <td style="font-weight:700;color:${m.varYoY == null ? 'var(--gris)' : m.varYoY >= 0 ? 'var(--ok)' : 'var(--err)'}">${pct(m.varYoY)}</td>
-      <td>
-        ${badgeHtml(m.varObj)}
-        <div style="margin-top:6px">
-          <div class="bar-track" style="width:90px">
-            <div class="bar-fill" style="width:${fillPct}%;background:${colorFor(m.varObj)}"></div>
-          </div>
-        </div>
-      </td>
-    </tr>`;
+  p.hostales.forEach(function(h) {
+    var m = getMes(h.meses); if (!m) return;
+    var fill = m.varObj != null ? Math.min(m.varObj * 100, 100) : 0;
+    var vc = m.varYoY == null ? 'color:var(--gris)' : m.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)';
+    html += '<tr>' +
+      '<td><span class="chip">' + h.nombre_completo + '</span></td>' +
+      '<td>' + fmt(m.real) + '</td>' +
+      '<td>' + fmt(m.anterior) + '</td>' +
+      '<td>' + fmt(m.objetivo) + '</td>' +
+      '<td style="font-weight:700;' + vc + '">' + pct(m.varYoY) + '</td>' +
+      '<td>' + badgeHtml(m.varObj) +
+        '<div style="margin-top:5px"><div class="bar-track" style="width:80px">' +
+          '<div class="bar-fill" style="width:' + fill + '%;background:' + colorFor(m.varObj) + '"></div>' +
+        '</div></div></td>' +
+    '</tr>';
   });
 
-  html += `</tbody>
-  <tfoot><tr>
-    <td>TOTAL ${p.nombre.toUpperCase()}</td>
-    <td>${fmt(t?.real)}</td>
-    <td>${fmt(t?.anterior)}</td>
-    <td>${fmt(t?.objetivo)}</td>
-    <td style="color:${t?.varYoY >= 0 ? 'var(--ok)' : 'var(--err)'}">${pct(t?.varYoY)}</td>
-    <td>${badgeHtml(t?.varObj)}</td>
-  </tr></tfoot>
-  </table></div></div>`;
+  var vc2 = t && t.varYoY != null ? (t.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)') : '';
+  html += '</tbody><tfoot><tr>' +
+    '<td>TOTAL ' + p.nombre.toUpperCase() + '</td>' +
+    '<td>' + fmt(t && t.real) + '</td>' +
+    '<td>' + fmt(t && t.anterior) + '</td>' +
+    '<td>' + fmt(t && t.objetivo) + '</td>' +
+    '<td style="' + vc2 + '">' + pct(t && t.varYoY) + '</td>' +
+    '<td>' + badgeHtml(t && t.varObj) + '</td>' +
+  '</tr></tfoot></table></div></div>';
 
   el.innerHTML = html;
-  bindBarTooltips(el);
+  bindTips(el);
 }
 
-/* ───────────────── BIND TOOLTIPS ───────────────── */
-function bindBarTooltips(container) {
-  container.querySelectorAll('[data-tip]').forEach(bar => {
-    bar.addEventListener('mouseenter', e => showTip(e, bar.dataset.tip));
-    bar.addEventListener('mousemove',  e => moveTip(e));
-    bar.addEventListener('mouseleave', hideTip);
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+function buildTabs() {
+  var bar  = document.getElementById('tabs-bar');
+  var main = document.getElementById('main-content');
+
+  function addTab(key, label) {
+    var btn = document.createElement('button');
+    btn.className = 'tab-btn'; btn.dataset.key = key; btn.textContent = label;
+    bar.appendChild(btn);
+    var panel = document.createElement('div');
+    panel.className = 'tab-content'; panel.id = 'panel-' + key;
+    main.appendChild(panel);
+  }
+
+  addTab('cadena', '🌎 Cadena');
+  Object.keys(DATA.paises).forEach(function(key) {
+    var p = DATA.paises[key];
+    addTab(key, (p.emoji || '') + ' ' + p.nombre);
+  });
+
+  bar.querySelector('.tab-btn').classList.add('active');
+  main.querySelector('.tab-content').classList.add('active');
+
+  bar.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      bar.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      main.querySelectorAll('.tab-content').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.key).classList.add('active');
+    });
   });
 }
 
-/* ───────────────── RENDER ALL ───────────────── */
+/* ══════════════════════════════════════════
+   RENDER ALL
+══════════════════════════════════════════ */
 function renderAll() {
   renderCadena();
-  Object.keys(DATA.paises).forEach(key => renderPais(key));
+  Object.keys(DATA.paises).forEach(function(key) { renderPais(key); });
 }
 
-window.addEventListener('DOMContentLoaded', init);
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', function() {
+  fetch(DATA_URL + '?t=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      DATA = data;
+
+      /* meses disponibles */
+      var mesesSet = new Set();
+      Object.values(DATA.paises).forEach(function(p) {
+        (p.meses || []).forEach(function(m) { mesesSet.add(m); });
+      });
+      var meses = Array.from(mesesSet).sort();
+      mesSel = meses[meses.length - 1] || '';
+
+      var sel = document.getElementById('mesSel');
+      meses.forEach(function(m) {
+        var o = document.createElement('option');
+        o.value = m; o.textContent = m;
+        sel.appendChild(o);
+      });
+      sel.value = mesSel;
+      sel.addEventListener('change', function(e) { mesSel = e.target.value; renderAll(); });
+
+      document.getElementById('h-updated').textContent =
+        new Date(DATA.updated).toLocaleDateString('es-CO', {day:'2-digit', month:'short', year:'numeric'});
+
+      buildTabs();
+      renderAll();
+    })
+    .catch(function(err) {
+      document.getElementById('main-content').innerHTML =
+        '<div style="padding:60px;text-align:center;color:var(--gris)"><div style="font-size:32px;margin-bottom:12px">⚠️</div>' +
+        '<div style="font-weight:700;font-size:14px">Error al cargar los datos</div>' +
+        '<div style="font-size:12px;margin-top:6px;color:var(--err)">Verifica que el JSON está disponible en GitHub.</div></div>';
+    });
+});
 </script>
 </body>
 </html>
