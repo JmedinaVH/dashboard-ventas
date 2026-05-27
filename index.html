@@ -195,10 +195,41 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 .st-real{color:var(--coral);}
 .st-ok{color:var(--ok);}
 .st-err{color:var(--err);}
+@media(max-width:860px){
+  .cadena-layout{flex-direction:column;}.cadena-donut{width:100%;}
+  .pais-layout{flex-direction:column;}.pais-donut{width:100%;}
+}
 @media(max-width:720px){
   header,.filtros,.tabs-bar,main{padding-left:14px;padding-right:14px;}
-  .bc-label{width:80px;font-size:10px;}
   .h-right{display:none;}
+  /* KPI más compactos */
+  .kpi-row{grid-template-columns:1fr 1fr;gap:8px;}
+  .kpi-val{font-size:22px;}
+  /* Semáforo: 1 columna */
+  .semaforo-grid{grid-template-columns:1fr;}
+  /* Gráfico de barras: scroll horizontal con ancho mínimo */
+  .chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .vbar-area{min-width:420px;}
+  /* Tabla: scroll horizontal */
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .detail-table{min-width:520px;}
+  /* Donut: centrar */
+  .donut-inner{flex-direction:column;align-items:center;}
+  .cadena-donut .donut-inner,.pais-donut .donut-inner{flex-direction:column;align-items:center;}
+  .donut-legend{grid-template-columns:1fr;}
+  /* Padding general */
+  main{padding:16px 14px 60px;}
+  .kpi-box{padding:14px 14px 12px;}
+  /* Hbar más compacto */
+  .hbar-label{width:70px;font-size:9px;}
+  /* Filtros */
+  .filtros{padding:8px 14px;gap:10px;}
+  /* Tabs sticky top ajustado */
+  .tabs-bar{top:106px;}
+}
+@media(max-width:400px){
+  .kpi-row{grid-template-columns:1fr;}
+  .kpi-val{font-size:26px;}
 }
 </style>
 </head>
@@ -364,7 +395,7 @@ function buildDonut(paisesData) {
       ' stroke-dasharray="' + dash.toFixed(2) + ' ' + (circ - dash + 0.5).toFixed(2) + '"' +
       ' stroke-dashoffset="' + (-(offset)).toFixed(2) + '"' +
       ' transform="rotate(-90 ' + cx + ' ' + cy + ')"' +
-      ' style="cursor:pointer" data-tip="' + (p.emoji || '') + ' ' + p.nombre + ': ' + fmt(p.total.real) + ' (' + (frac * 100).toFixed(1) + '%)"></circle>';
+      ' style="cursor:pointer" data-tip="' + p.nombre + ': ' + fmt(p.total.real) + ' (' + (frac * 100).toFixed(1) + '%)"></circle>';
     offset += dash;
     return { svg: s, p: p, frac: frac, col: col };
   });
@@ -378,7 +409,7 @@ function buildDonut(paisesData) {
   var legHtml = segs.map(function(s) {
     return '<div class="dl-item">' +
       '<div class="dl-dot" style="background:' + s.col + '"></div>' +
-      '<span class="dl-name">' + (s.p.emoji || '') + ' ' + s.p.nombre + '</span>' +
+      '<span class="dl-name">' + s.p.nombre + '</span>' +
       '<span class="dl-pct" style="color:' + s.col + '">' + (s.frac * 100).toFixed(1) + '%</span>' +
       '<span class="dl-val">' + fmtK(s.p.total.real) + '</span>' +
     '</div>';
@@ -514,7 +545,7 @@ function renderCadena() {
     var yoyColor = t.varYoY == null ? 'color:var(--gris)' : t.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)';
     html += '<div class="pais-card" style="--pc:' + colorFor(t.varObj) + '">' +
       '<div class="pc-header">' +
-        '<div class="pc-nombre">' + (p.emoji || '') + ' ' + p.nombre + '</div>' +
+        '<div class="pc-nombre">' + p.nombre + '</div>' +
         badgeHtml(t.varObj) +
       '</div>' +
       '<div class="pc-cifras">' +
@@ -533,7 +564,7 @@ function renderCadena() {
   /* Gráfico cadena */
   var rows = Object.values(DATA.paises)
     .filter(function(p) { return p.total; })
-    .map(function(p) { return { label: (p.emoji || '') + ' ' + p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
+    .map(function(p) { return { label: p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
 
   html += '<div class="sec"><div class="sec-hdr"><h2>YTD vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
     buildBarChart(rows, 'Comparativo por país — YTD') +
@@ -655,7 +686,7 @@ function buildTabs() {
   addTab('cadena', '🌎 Cadena');
   Object.keys(DATA.paises).forEach(function(key) {
     var p = DATA.paises[key];
-    addTab(key, (p.emoji || '') + ' ' + p.nombre);
+    addTab(key, p.nombre);
   });
 
   bar.querySelector('.tab-btn').classList.add('active');
