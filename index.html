@@ -450,8 +450,8 @@ function buildDonutHostales(hostales) {
   var MAX_V = 6;
   var uid = 'dh' + Math.random().toString(36).substr(2,5);
   var legHtml=segs.map(function(s,i){
-    var extra = i >= MAX_V ? ' class="dh-x-'+uid+'" style="display:none"' : '';
-    return '<div'+extra+' class="dl-item">'+
+    var extra = i >= MAX_V ? ' class="dl-item dh-x-'+uid+'" style="display:none"' : ' class="dl-item"';
+    return '<div'+extra+'>'+
       '<div class="dl-dot" style="background:'+s.col+'"></div>'+
       '<span class="dl-name">'+s.p.short+'</span>'+
       '<span class="dl-pct" style="color:'+s.col+'">'+(s.frac*100).toFixed(1)+'%</span>'+
