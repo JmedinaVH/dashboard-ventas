@@ -145,14 +145,16 @@ main{max-width:1200px;margin:0 auto;padding:24px 36px 80px;}
 /* ── HORIZONTAL BAR CHART ── */
 .hchart-wrap{background:var(--surface);border-radius:var(--rl);border:1.5px solid var(--border);padding:20px 22px 16px;}
 .hchart-title{font-size:9px;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
-.hbar-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);}
+.hbar-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
 .hbar-row:last-child{border-bottom:none;}
-.hbar-label{width:84px;font-size:9px;font-weight:700;color:var(--dark);flex-shrink:0;line-height:1.3;}
-.hbar-sticks{flex:1;display:flex;flex-direction:column;gap:3px;}
+.hbar-label{width:90px;font-size:10px;font-weight:700;color:var(--dark);flex-shrink:0;line-height:1.3;padding-top:2px;}
+.hbar-sticks{flex:1;display:flex;flex-direction:column;gap:1px;}
 .hbar-group{display:flex;align-items:center;gap:5px;}
-.hbar{height:7px;border-radius:0 3px 3px 0;min-width:2px;position:relative;cursor:pointer;transition:filter .16s;flex-shrink:0;}
+.hbar{height:9px;border-radius:0;min-width:2px;cursor:pointer;transition:filter .16s;flex-shrink:0;}
+.hbar-group:first-child .hbar{border-radius:0 2px 0 0;}
+.hbar-group:last-child .hbar{border-radius:0 0 2px 0;}
 .hbar:hover{filter:brightness(1.15);}
-.hbar-num{font-size:8px;font-weight:800;color:var(--gris);white-space:nowrap;}
+.hbar-num{font-size:9px;font-weight:700;color:var(--gris);white-space:nowrap;}
 .hbar.b-real{background:var(--coral);}
 .hbar.b-obj{background:#27ae60;}
 .hbar.b-ant{background:var(--cd);}
@@ -431,8 +433,19 @@ function buildDonutHostales(hostales) {
     return{svg:s,p:p,frac:frac,col:col};
   });
   var svgHtml='<svg width="100" height="100" viewBox="0 0 100 100">'+segs.map(function(s){return s.svg;}).join('')+'<text x="50" y="46" text-anchor="middle" font-family="Outfit,sans-serif" font-size="9" font-weight="700" fill="#7A6E68">Real</text><text x="50" y="59" text-anchor="middle" font-family="Outfit,sans-serif" font-size="11" font-weight="800" fill="#1E100A">'+fmtK(total)+'</text></svg>';
-  var legHtml=segs.map(function(s){return'<div class="dl-item" style="font-size:10px"><div class="dl-dot" style="background:'+s.col+';width:8px;height:8px"></div><span class="dl-name" style="font-size:10px">'+s.p.short+'</span><span class="dl-pct" style="color:'+s.col+';font-size:11px">'+(s.frac*100).toFixed(1)+'%</span><span class="dl-val" style="font-size:9px">'+fmtK(s.p.real)+'</span></div>';}).join('');
-  return'<div class="donut-wrap"><div class="donut-title">Participación por hostal</div><div class="donut-inner" style="gap:14px"><div style="flex-shrink:0">'+svgHtml+'</div><div class="donut-legend" style="grid-template-columns:1fr;gap:4px">'+legHtml+'</div></div></div>';
+  var legHtml=segs.map(function(s){
+    return '<div style="display:flex;align-items:center;gap:4px">' +
+      '<div style="width:8px;height:8px;border-radius:50%;background:'+s.col+';flex-shrink:0"></div>' +
+      '<span style="font-size:10px;font-weight:600;color:var(--dark)">'+s.p.short+'</span>' +
+      '<span style="font-size:10px;font-weight:800;color:'+s.col+'">'+(s.frac*100).toFixed(1)+'%</span>' +
+    '</div>';
+  }).join('');
+  return '<div class="donut-wrap">' +
+    '<div class="donut-title">Participación por hostal</div>' +
+    '<div style="display:flex;flex-direction:column;align-items:center;gap:12px">' +
+      svgHtml +
+      '<div style="display:flex;flex-wrap:wrap;gap:5px 12px;justify-content:center">' + legHtml + '</div>' +
+    '</div></div>';
 }
 
 /* ══════════════════════════════════════════
