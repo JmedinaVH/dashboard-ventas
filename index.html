@@ -7,6 +7,14 @@
 <link rel="icon" type="image/png" href="favicon-32x32.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
+/* Forzar fuente nativa de emojis — Outfit no los incluye */
+@font-face {
+  font-family: 'Outfit';
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Noto Color Emoji');
+  unicode-range: U+1F000-1FFFF, U+2600-27FF, U+FE00-FE0F, U+1F300-1F9FF;
+}
+</style>
+<style>
 :root {
   --coral: #F04B24;
   --coral-d: #C93A18;
@@ -273,17 +281,20 @@ header {
   text-align: right; padding-top: 4px;
   line-height: 1.3;
 }
-.bar-row-bars { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.bar-group { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.bar-row-bars { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; overflow: hidden; }
+.bar-group { display: flex; align-items: center; gap: 8px; min-width: 0; width: 100%; }
 .bar-group-bar {
-  height: 11px; border-radius: 99px; min-width: 3px; flex-shrink: 0;
+  height: 11px; border-radius: 99px; min-width: 3px;
+  flex-shrink: 0;
+  /* Cap: never wider than 60% of the row so label always fits */
+  max-width: 60%;
   transition: width .7s cubic-bezier(.4,0,.2,1);
   position: relative; cursor: default;
 }
 .bar-group-bar.b-real    { background: var(--coral); }
 .bar-group-bar.b-obj     { background: #27ae60; }
 .bar-group-bar.b-ant     { background: var(--cd); }
-.bar-group-lbl { font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--dark); flex-shrink: 0; }
+.bar-group-lbl { font-size: 11px; font-weight: 700; white-space: nowrap; color: var(--dark); flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; max-width: 38%; }
 .bar-group-lbl.l-real { color: var(--coral-d); }
 .bar-group-lbl.l-obj  { color: #166534; }
 .bar-group-lbl.l-ant  { color: var(--gris); }
@@ -527,7 +538,7 @@ function buildBarChart(rows, titleText) {
     ...rows.flatMap(r => [r.real || 0, r.objetivo || 0, r.anterior || 0]),
     1
   );
-  const w = v => Math.max(Math.round((v / maxVal) * 100), 0.3);
+  const w = v => Math.min(Math.max(Math.round((v / maxVal) * 100), 1), 100);
 
   let html = `<div class="chart-wrap">
     <div class="chart-title">${titleText}</div>
@@ -758,10 +769,10 @@ function renderPais(key) {
 
 /* ───────────────── BIND TOOLTIPS ───────────────── */
 function bindBarTooltips(container) {
-  container.querySelectorAll('[data-tip]').forEach(el => {
-    el.addEventListener('mouseenter', e => showTip(e, el.dataset.tip));
-    el.addEventListener('mousemove',  e => moveTip(e));
-    el.addEventListener('mouseleave', hideTip);
+  container.querySelectorAll('[data-tip]').forEach(bar => {
+    bar.addEventListener('mouseenter', e => showTip(e, bar.dataset.tip));
+    bar.addEventListener('mousemove',  e => moveTip(e));
+    bar.addEventListener('mouseleave', hideTip);
   });
 }
 
