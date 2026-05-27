@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-27T06:45:45.144Z",
+  "updated": "2026-05-27T15:50:10.804Z",
   "paises": {
     "Colombia": {
       "nombre": "Colombia",
@@ -416,11 +416,11 @@
         "Abr26"
       ],
       "total": {
-        "real": 0,
-        "anterior": 10090,
-        "objetivo": 7162.8,
-        "varYoY": -1,
-        "varObj": 0
+        "real": 1066,
+        "anterior": 15714,
+        "objetivo": 11095.2,
+        "varYoY": -0.93,
+        "varObj": 0.1
       },
       "hostales": [
         {
@@ -433,6 +433,19 @@
               "objetivo": 7162.8,
               "varYoY": -1,
               "varObj": 0
+            }
+          }
+        },
+        {
+          "nombre_completo": "Viajero Calafate",
+          "short": "Calafate",
+          "meses": {
+            "Abr26": {
+              "real": 1066,
+              "anterior": 5624,
+              "objetivo": 3932.4,
+              "varYoY": -0.81,
+              "varObj": 0.27
             }
           }
         }
@@ -524,10 +537,10 @@
     }
   },
   "cadena": {
-    "real": 255938.21,
-    "anterior": 177633.83,
-    "objetivo": 335607.5,
-    "varYoY": 0.44,
+    "real": 257004.21,
+    "anterior": 183257.83,
+    "objetivo": 339539.9,
+    "varYoY": 0.4,
     "varObj": 0.76
   }
 }
