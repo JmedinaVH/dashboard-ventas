@@ -403,11 +403,7 @@ var COLORS = ['#F04B24','#27ae60','#0369a1','#854d0e','#8b5cf6','#10b981','#f59e
 var entries = Object.values(paisesData).map(function(p) {
   return { p: p, t: calcPaisTotals(p) };
 }).filter(function(x) { return x.t.real > 0; });
-entries.sort(function(a,b){
-  var va = a.t.varObj != null ? a.t.varObj : -999;
-  var vb = b.t.varObj != null ? b.t.varObj : -999;
-  return vb - va;
-});
+entries.sort(function(a,b){ return b.real - a.real; });
 var total = entries.reduce(function(s, x) { return s + x.t.real; }, 0);
 if (!total) return '';
 var r = 72, cx = 90, cy = 90, sw = 30;
