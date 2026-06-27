@@ -1,11 +1,12 @@
 {
-  "updated": "2026-05-27T20:57:25.352Z",
+  "updated": "2026-06-27T04:32:43.374Z",
   "paises": {
     "Colombia": {
       "nombre": "Colombia",
       "emoji": "🇨🇴",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 114537.32,
@@ -25,6 +26,13 @@
               "objetivo": 10368.22,
               "varYoY": -0.28,
               "varObj": 0.99
+            },
+            "May26": {
+              "real": 10546.77,
+              "anterior": 16005.02,
+              "objetivo": 13048.23,
+              "varYoY": -0.34,
+              "varObj": 0.81
             }
           }
         },
@@ -38,6 +46,13 @@
               "objetivo": 2514.78,
               "varYoY": -0.82,
               "varObj": 0.35
+            },
+            "May26": {
+              "real": 898.68,
+              "anterior": 5082.98,
+              "objetivo": 4180.25,
+              "varYoY": -0.82,
+              "varObj": 0.21
             }
           }
         },
@@ -51,6 +66,13 @@
               "objetivo": 16379.82,
               "varYoY": 5.03,
               "varObj": 2.25
+            },
+            "May26": {
+              "real": 37205.97,
+              "anterior": 8677.57,
+              "objetivo": 18625.12,
+              "varYoY": 3.29,
+              "varObj": 2
             }
           }
         },
@@ -64,6 +86,13 @@
               "objetivo": 29669.54,
               "varYoY": 3.09,
               "varObj": 1.32
+            },
+            "May26": {
+              "real": 40880.42,
+              "anterior": 11278.75,
+              "objetivo": 31896.4,
+              "varYoY": 2.62,
+              "varObj": 1.28
             }
           }
         },
@@ -77,6 +106,13 @@
               "objetivo": 3338.84,
               "varYoY": 5.83,
               "varObj": 0.56
+            },
+            "May26": {
+              "real": 3576.01,
+              "anterior": 275.46,
+              "objetivo": 4860.54,
+              "varYoY": 11.98,
+              "varObj": 0.74
             }
           }
         },
@@ -90,6 +126,13 @@
               "objetivo": 9708.09,
               "varYoY": 0.73,
               "varObj": 0.97
+            },
+            "May26": {
+              "real": 11507.16,
+              "anterior": 5480.46,
+              "objetivo": 11414.78,
+              "varYoY": 1.1,
+              "varObj": 1.01
             }
           }
         },
@@ -103,6 +146,13 @@
               "objetivo": 1139.33,
               "varYoY": -0.78,
               "varObj": 0.16
+            },
+            "May26": {
+              "real": 183.73,
+              "anterior": 847.25,
+              "objetivo": 2117.29,
+              "varYoY": -0.78,
+              "varObj": 0.09
             }
           }
         },
@@ -116,6 +166,13 @@
               "objetivo": 557.73,
               "varYoY": -0.84,
               "varObj": 0.25
+            },
+            "May26": {
+              "real": 139.08,
+              "anterior": 863.1,
+              "objetivo": 987.32,
+              "varYoY": -0.84,
+              "varObj": 0.14
             }
           }
         },
@@ -129,6 +186,13 @@
               "objetivo": 4060.64,
               "varYoY": -0.47,
               "varObj": 0.63
+            },
+            "May26": {
+              "real": 4042.03,
+              "anterior": 5454.13,
+              "objetivo": 5738.31,
+              "varYoY": -0.26,
+              "varObj": 0.7
             }
           }
         },
@@ -142,6 +206,13 @@
               "objetivo": 16607.76,
               "varYoY": -0.39,
               "varObj": 0.78
+            },
+            "May26": {
+              "real": 27274.62,
+              "anterior": 27354.54,
+              "objetivo": 20380.68,
+              "varYoY": 0,
+              "varObj": 1.34
             }
           }
         }
@@ -151,7 +222,8 @@
       "nombre": "Perú",
       "emoji": "🇵🇪",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 114835.29,
@@ -171,6 +243,13 @@
               "objetivo": 51832.63,
               "varYoY": 0.78,
               "varObj": 1.18
+            },
+            "May26": {
+              "real": 84077.65,
+              "anterior": 45261.47,
+              "objetivo": 61587.9,
+              "varYoY": 0.86,
+              "varObj": 1.37
             }
           }
         },
@@ -184,6 +263,13 @@
               "objetivo": 3000,
               "varYoY": null,
               "varObj": 0
+            },
+            "May26": {
+              "real": 537.65,
+              "anterior": 325.59,
+              "objetivo": 6000,
+              "varYoY": 0.65,
+              "varObj": 0.09
             }
           }
         },
@@ -197,6 +283,13 @@
               "objetivo": 21332.26,
               "varYoY": 3.29,
               "varObj": 1.03
+            },
+            "May26": {
+              "real": 26826.76,
+              "anterior": 8977.06,
+              "objetivo": 24537.75,
+              "varYoY": 1.99,
+              "varObj": 1.09
             }
           }
         },
@@ -210,6 +303,13 @@
               "objetivo": 19636.45,
               "varYoY": 1.28,
               "varObj": 1.46
+            },
+            "May26": {
+              "real": 37323.82,
+              "anterior": 18172.35,
+              "objetivo": 23848.78,
+              "varYoY": 1.05,
+              "varObj": 1.57
             }
           }
         },
@@ -223,6 +323,13 @@
               "objetivo": 4465.31,
               "varYoY": -0.34,
               "varObj": 0.72
+            },
+            "May26": {
+              "real": 3855,
+              "anterior": 6455.59,
+              "objetivo": 6869.44,
+              "varYoY": -0.4,
+              "varObj": 0.56
             }
           }
         }
@@ -232,7 +339,8 @@
       "nombre": "México",
       "emoji": "🇲🇽",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 4570.1,
@@ -252,6 +360,13 @@
               "objetivo": 7917.68,
               "varYoY": 4.28,
               "varObj": 0.26
+            },
+            "May26": {
+              "real": 2795.84,
+              "anterior": 2289.03,
+              "objetivo": 7954.56,
+              "varYoY": 0.22,
+              "varObj": 0.35
             }
           }
         },
@@ -265,6 +380,13 @@
               "objetivo": 7947,
               "varYoY": -0.07,
               "varObj": 0.07
+            },
+            "May26": {
+              "real": 1442.5,
+              "anterior": 601.93,
+              "objetivo": 5060.5,
+              "varYoY": 1.4,
+              "varObj": 0.29
             }
           }
         },
@@ -278,6 +400,13 @@
               "objetivo": 15373.82,
               "varYoY": null,
               "varObj": 0.08
+            },
+            "May26": {
+              "real": 1161.5,
+              "anterior": 0,
+              "objetivo": 5969.81,
+              "varYoY": null,
+              "varObj": 0.19
             }
           }
         },
@@ -291,6 +420,13 @@
               "objetivo": 15862.99,
               "varYoY": -0.9,
               "varObj": 0.05
+            },
+            "May26": {
+              "real": 1529.98,
+              "anterior": 11742.15,
+              "objetivo": 6411.63,
+              "varYoY": -0.87,
+              "varObj": 0.24
             }
           }
         },
@@ -304,6 +440,13 @@
               "objetivo": 7686.91,
               "varYoY": -1,
               "varObj": 0
+            },
+            "May26": {
+              "real": 0,
+              "anterior": 3354.63,
+              "objetivo": 2713.04,
+              "varYoY": -1,
+              "varObj": 0
             }
           }
         }
@@ -313,7 +456,8 @@
       "nombre": "Ecuador",
       "emoji": "🇪🇨",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 1548,
@@ -333,6 +477,13 @@
               "objetivo": 14106,
               "varYoY": -0.79,
               "varObj": 0.11
+            },
+            "May26": {
+              "real": 1775.6,
+              "anterior": 6863,
+              "objetivo": 16595.4,
+              "varYoY": -0.74,
+              "varObj": 0.11
             }
           }
         }
@@ -342,7 +493,8 @@
       "nombre": "Panamá",
       "emoji": "🇵🇦",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 2038,
@@ -362,6 +514,13 @@
               "objetivo": 28213.2,
               "varYoY": null,
               "varObj": 0.07
+            },
+            "May26": {
+              "real": 9969.41,
+              "anterior": 0,
+              "objetivo": 33192,
+              "varYoY": null,
+              "varObj": 0.3
             }
           }
         }
@@ -371,7 +530,8 @@
       "nombre": "Costa Rica",
       "emoji": "🇨🇷",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 13947,
@@ -391,6 +551,13 @@
               "objetivo": 14161.05,
               "varYoY": null,
               "varObj": 0.86
+            },
+            "May26": {
+              "real": 23327.51,
+              "anterior": 0,
+              "objetivo": 16659.9,
+              "varYoY": null,
+              "varObj": 1.4
             }
           }
         },
@@ -404,6 +571,13 @@
               "objetivo": 17307.95,
               "varYoY": null,
               "varObj": 0.1
+            },
+            "May26": {
+              "real": 2138.64,
+              "anterior": 0,
+              "objetivo": 20362.1,
+              "varYoY": null,
+              "varObj": 0.11
             }
           }
         }
@@ -413,7 +587,8 @@
       "nombre": "Argentina",
       "emoji": "🇦🇷",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 1066,
@@ -433,6 +608,13 @@
               "objetivo": 7162.8,
               "varYoY": -1,
               "varObj": 0
+            },
+            "May26": {
+              "real": 0,
+              "anterior": 10090,
+              "objetivo": 8427,
+              "varYoY": -1,
+              "varObj": 0
             }
           }
         },
@@ -441,6 +623,13 @@
           "short": "Calafate",
           "meses": {
             "Abr26": {
+              "real": 1066,
+              "anterior": 5624,
+              "objetivo": 3932.4,
+              "varYoY": -0.81,
+              "varObj": 0.27
+            },
+            "May26": {
               "real": 1066,
               "anterior": 5624,
               "objetivo": 3932.4,
@@ -455,7 +644,8 @@
       "nombre": "Uruguay",
       "emoji": "🇺🇾",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 4462.5,
@@ -475,6 +665,13 @@
               "objetivo": 2908.2,
               "varYoY": 1.25,
               "varObj": 1.36
+            },
+            "May26": {
+              "real": 3967.5,
+              "anterior": 1765.7,
+              "objetivo": 4424.7,
+              "varYoY": 1.25,
+              "varObj": 0.9
             }
           }
         },
@@ -488,6 +685,13 @@
               "objetivo": 1674.5,
               "varYoY": -0.77,
               "varObj": 0.3
+            },
+            "May26": {
+              "real": 495,
+              "anterior": 3291.45,
+              "objetivo": 2854,
+              "varYoY": -0.85,
+              "varObj": 0.17
             }
           }
         },
@@ -501,6 +705,13 @@
               "objetivo": 674,
               "varYoY": null,
               "varObj": 0
+            },
+            "May26": {
+              "real": 0,
+              "anterior": 0,
+              "objetivo": 1348,
+              "varYoY": null,
+              "varObj": 0
             }
           }
         }
@@ -510,7 +721,8 @@
       "nombre": "USA",
       "emoji": "🇺🇸",
       "meses": [
-        "Abr26"
+        "Abr26",
+        "May26"
       ],
       "total": {
         "real": 0,
@@ -530,6 +742,13 @@
               "objetivo": 124611.57,
               "varYoY": -1,
               "varObj": 0
+            },
+            "May26": {
+              "real": 4240.37,
+              "anterior": 19139,
+              "objetivo": 151897.65,
+              "varYoY": -0.78,
+              "varObj": 0.03
             }
           }
         }
