@@ -330,6 +330,41 @@ function getMes(mesesObj) {
   var keys = Object.keys(mesesObj);
   return keys.length ? mesesObj[keys[keys.length - 1]] : null;
 }
+function calcPaisTotals(p) {
+if (!p.hostales) return p.total || {};
+var real=0, anterior=0, objetivo=0;
+p.hostales.forEach(function(h) {
+var m = getMes(h.meses); if (!m) return;
+real += m.real || 0;
+anterior += m.anterior || 0;
+objetivo += m.objetivo || 0;
+});
+return {
+real: real, anterior: anterior, objetivo: objetivo,
+varYoY: anterior > 0 ? (real/anterior - 1) : null,
+varObj: objetivo > 0 ? (real/objetivo) : null
+};
+}
+function calcCadenaTotals() {
+var real=0, anterior=0, objetivo=0;
+Object.values(DATA.paises).forEach(function(p) {
+var t = calcPaisTotals(p);
+real += t.real || 0; anterior += t.anterior || var entries = Object.values(paisesData).map(function(p) {
+return { p: p, t: calcPaisTotals(p) };
+}).filter(function(x) { return x.t.real > 0; });
+entries.sort(function(a,b){
+var va = a.t.varObj != null ? a.t.varObj : -999;
+var vb = b.t.varObj != null ? b.t.varObj : -999;
+return vb - va;
+});
+var total = entries.reduce(function(s, x) { return s + x.t.real; }, 0);0; objetivo += t.objetivo || 0;
+});
+return {
+real: real, anterior: anterior, objetivo: objetivo,
+varYoY: anterior > 0 ? (real/anterior - 1) : null,
+varObj: objetivo > 0 ? (real/objetivo) : null
+};
+}
 
 /* ══════════════════════════════════════════
    BAR CHART — contiene las barras dentro del flex
@@ -386,8 +421,9 @@ function buildDonut(paisesData) {
   var r = 72, cx = 90, cy = 90, sw = 30;
   var circ   = 2 * Math.PI * r;
   var offset = 0;
-  var segs   = entries.map(function(p, i) {
-    var frac = p.total.real / total;
+  var segs = entries.map(function(x, i) {
+var p = x.p;
+var frac = x.t.real / total;
     var dash = frac * circ;
     var col  = COLORS[i % COLORS.length];
     var s = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none"' +
@@ -395,8 +431,7 @@ function buildDonut(paisesData) {
       ' stroke-dasharray="' + dash.toFixed(2) + ' ' + (circ - dash + 0.5).toFixed(2) + '"' +
       ' stroke-dashoffset="' + (-(offset)).toFixed(2) + '"' +
       ' transform="rotate(-90 ' + cx + ' ' + cy + ')"' +
-      ' style="cursor:pointer" data-tip="' + p.nombre + ': ' + fmt(p.total.real) + ' (' + (frac * 100).toFixed(1) + '%)"></circle>';
-    offset += dash;
+' style="cursor:pointer" data-tip="' + p.nombre + ': ' + fmt(x.t.real) + ' (' + (frac * 100).toFixed(1) + '%)"></circle>';    offset += dash;
     return { svg: s, p: p, frac: frac, col: col };
   });
 
@@ -411,8 +446,7 @@ function buildDonut(paisesData) {
       '<div class="dl-dot" style="background:' + s.col + '"></div>' +
       '<span class="dl-name">' + s.p.nombre + '</span>' +
       '<span class="dl-pct" style="color:' + s.col + '">' + (s.frac * 100).toFixed(1) + '%</span>' +
-      '<span class="dl-val">' + fmtK(s.p.total.real) + '</span>' +
-    '</div>';
+'<span class="dl-val">' + fmtK(s.p.t ? s.p.t.real : 0) + '</span>' +    '</div>';
   }).join('');
 
   return '<div class="donut-wrap">' +
@@ -540,8 +574,7 @@ function renderCadena() {
 
   Object.entries(DATA.paises).forEach(function(entry) {
     var key = entry[0], p = entry[1];
-    var t = p.total; if (!t) return;
-    var fill = t.varObj != null ? Math.min(t.varObj * 100, 100) : 0;
+var t = calcPaisTotals(p); if (!t || (!t.real && !t.objetivo)) return;    var fill = t.varObj != null ? Math.min(t.varObj * 100, 100) : 0;
     var yoyColor = t.varYoY == null ? 'color:var(--gris)' : t.varYoY >= 0 ? 'color:var(--ok)' : 'color:var(--err)';
     html += '<div class="pais-card" style="--pc:' + colorFor(t.varObj) + '">' +
       '<div class="pc-header">' +
@@ -562,9 +595,10 @@ function renderCadena() {
   html += '</div></div></div></div>';
 
   /* Gráfico cadena */
-  var rows = Object.values(DATA.paises)
-    .filter(function(p) { return p.total; })
-    .map(function(p) { return { label: p.nombre, real: p.total.real, objetivo: p.total.objetivo, anterior: p.total.anterior }; });
+  var rows = Object.values(DATA.paises).map(function(p) {
+var t = calcPaisTotals(p);
+return { label: p.nombre, real: t.real, objetivo: t.objetivo, anterior: t.anterior };
+});
 
   html += '<div class="sec"><div class="sec-hdr"><h2>YTD vs Objetivo vs Año anterior</h2><div class="linea"></div></div>' +
     buildBarChart(rows, 'Comparativo por país — YTD') +
@@ -582,8 +616,8 @@ function renderPais(key) {
   if (!el) return;
   var p = DATA.paises[key];
   if (!p || !p.hostales) { el.innerHTML = '<p style="color:var(--gris);padding:20px;">Sin datos.</p>'; return; }
-  var t = p.total;
-  var kpiLabel = mesSel ? 'YTD · ' + mesSel : 'YTD';
+  var t = calcPaisTotals(p);
+var kpiLabel = mesSel ? 'YTD · ' + mesSel : 'YTD';
 
   var html = '';
 
