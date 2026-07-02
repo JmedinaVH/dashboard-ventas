@@ -307,9 +307,8 @@ function pct(n) {
   return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '%';
 }
 function pctYoY(n) {
-  // Muestra como cumplimiento: real/anterior (no la variación)
   if (n == null) return '—';
-  return ((1 + n) * 100).toFixed(1) + '%';
+  return (n >= 0 ? '+' : '') + (n * 100).toFixed(1) + '% YoY';
 }
 function badgeHtml(v) {
   if (v == null) return '<span class="badge b-blue">Nuevo</span>';
